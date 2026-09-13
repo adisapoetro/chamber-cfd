@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.coverage
+runs/
+*.mp4
+.DS_Store
+/archive/
+.venv-*/
+*.gif
+*.blend
+*.blend1
