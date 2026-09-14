@@ -1,0 +1,77 @@
+{
+    "exchange": {
+        "label": "Prescribed February 2025 daytime Q95 net uptake",
+        "model": "constant_leaflet_net_exchange",
+        "net_co2_umol_s": -44.40047791098563
+    },
+    "numerics": {
+        "viscosity_m2_s": 1.5e-5,
+        "trunk_drag_per_m": 20,
+        "save_every_s": 10,
+        "turbulent_schmidt": 0.7,
+        "molecular_diffusivity_m2_s": 1.6e-5,
+        "dt_s": 0.5,
+        "cell_m": 0.5,
+        "smagorinsky": 0.12,
+        "canopy_drag_per_m": 0.3
+    },
+    "fans": {
+        "schedule": "closed_only",
+        "pole_y_m": 0,
+        "model": "Delta AFC1212DE",
+        "first_azimuth_deg": 0,
+        "diameter_m": 0.12,
+        "count": 3,
+        "free_air_cfm_per_fan": 148.3,
+        "momentum_factor": 1,
+        "kernel_sigma_m": 0.3,
+        "pole_x_m": 0.3
+    },
+    "display": {
+        "co2_max_ppm": 405,
+        "co2_min_ppm": 380,
+        "fps": 6
+    },
+    "cycle": {
+        "opening_travel_s": 20,
+        "closed_s": 300,
+        "open_phase_s": 600,
+        "cycles": 2,
+        "closing_travel_s": 20
+    },
+    "waterlily": {
+        "kernel_width_cells": 1,
+        "pressure_max_iterations": 1000,
+        "numerical_wall_cells": 3,
+        "pressure_tolerance": 1.0e-12
+    },
+    "air": {
+        "ambient_co2_ppm": 400,
+        "pressure_pa": 101325,
+        "wind_speed_m_s": 1.5,
+        "initial_co2_ppm": 400,
+        "temperature_k": 298.15,
+        "wind_to_deg": 0
+    },
+    "palm": {
+        "trunk_radius_m": 0.14483099821362477,
+        "crown_radius_y_m": 1.52,
+        "crown_radius_x_m": 1.52,
+        "height_m": 2.39
+    },
+    "domain": {
+        "x_m": 14,
+        "z_m": 9.3,
+        "y_m": 10
+    },
+    "chamber": {
+        "depth_m": 6,
+        "physical_wall_thickness_m": 0.003,
+        "width_m": 4,
+        "height_m": 4,
+        "floor_m": 0.6,
+        "maximum_gap_m": 2
+    },
+    "title": "Operating chamber · WaterLily",
+    "schema_version": 1
+}

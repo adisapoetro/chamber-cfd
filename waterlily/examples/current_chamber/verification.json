@@ -1,0 +1,14 @@
+{
+  "implementation_checks": "PASS",
+  "scientific_status": "DIAGNOSTIC_NOT_VALIDATED",
+  "snapshots": 181,
+  "media_files": 32,
+  "pngs": 24,
+  "mp4s": 4,
+  "independent_inventory_error_max_ppm_m3": 6.752088665962219e-09,
+  "first_sealed_mean_error_max_ppm": 1.2050804798491299e-11,
+  "coupling_correction_10pct_gate": "FAIL",
+  "source_and_output_checksums": "PASS",
+  "media_decode": "PASS",
+  "white_png_corners": "PASS"
+}

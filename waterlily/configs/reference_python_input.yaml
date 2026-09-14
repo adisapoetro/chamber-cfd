@@ -1,0 +1,72 @@
+# Reference chamber configuration. Units and conventions: docs/operating/INPUTS.md.
+# Negative exchange removes CO2. null fan lists = evenly spaced heights/directions.
+# Nominal design dimensions: 6 m width × 4 m depth × 4 m clear height.
+# Solver x/y below are the design's depth/width. Inside dimensions remain unmeasured.
+schema_version: 1
+title: Operating chamber · central fans and leaf uptake
+chamber:
+  width_m: 4.0
+  depth_m: 6.0
+  height_m: 4.0
+  floor_m: 0.6
+  maximum_gap_m: 2.0
+domain:
+  x_m: null
+  y_m: null
+  z_m: null
+air:
+  wind_speed_m_s: 1.5
+  wind_to_deg: 0.0
+  ambient_co2_ppm: 400.0
+  initial_co2_ppm: 400.0
+  temperature_k: 298.15
+  pressure_pa: 101325.0
+cycle:
+  closed_s: 300.0
+  open_phase_s: 600.0
+  opening_travel_s: 20.0
+  closing_travel_s: 20.0
+  cycles: 2
+palm:
+  height_m: 2.39
+  crown_radius_x_m: 1.52
+  crown_radius_y_m: 1.52
+  trunk_radius_m: 0.14483099821362477
+exchange:
+  net_co2_umol_s: -44.40047791098563
+  label: Prescribed February 2025 daytime Q95 net uptake
+  model: constant_leaflet_net_exchange
+fans:
+  count: 3
+  pole_x_m: 0.3
+  pole_y_m: 0.0
+  heights_m: null
+  azimuths_deg: null
+  first_azimuth_deg: 0.0
+  model: Delta AFC1212DE
+  diameter_m: 0.12
+  free_air_cfm_per_fan: 148.3
+  momentum_factor: 1.0
+  kernel_sigma_m: 0.3
+  schedule: closed_only
+numerics:
+  cell_m: 0.5
+  dt_s: 0.5
+  save_every_s: 10.0
+  duration_s: null
+  viscosity_m2_s: 1.5e-05
+  molecular_diffusivity_m2_s: 1.6e-05
+  smagorinsky: 0.12
+  turbulent_schmidt: 0.7
+  canopy_drag_per_m: 0.3
+  trunk_drag_per_m: 20.0
+screens:
+  enabled: true
+  duration_s: null
+  grid_refinement: 1.5
+  timestep_refinement: 2.0
+  relative_tolerance: 0.05
+display:
+  co2_min_ppm: 380.0
+  co2_max_ppm: 405.0
+  fps: 6

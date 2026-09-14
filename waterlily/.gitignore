@@ -1,0 +1,7 @@
+.julia-depot/
+.venv*/
+__pycache__/
+results/
+.DS_Store
+!/examples/current_chamber/videos/*.mp4
+!/examples/current_chamber/videos/*.gif
