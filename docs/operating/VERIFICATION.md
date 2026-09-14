@@ -1,46 +1,59 @@
-# Verification of the portable operating workflow
+# Operating-chamber verification
 
-Completed 13 September 2026; work and recovery record began 12 September.
-These are implementation and numerical checks, not empirical validation.
+## Current size revision: 14 September 2026
 
-| Check | Result |
+The owner adopted documented nominal **6 × 4 × 4 m** geometry. The solver's
+x/y/z dimensions are **4 × 6 × 4 m**, with 96 m³ rectangular airspace. Three
+fan levels follow the equal-band rule: 0.667, 2.000 and 3.333 m above the floor.
+The fixed support, wind, palm, prescribed uptake, cycle and numerical operators
+retain their previous settings. Automatic exterior height increases to 9.3 m.
+
+| Check | Current result |
 |---|---|
-| Default full numerical replay | All histories and all 243 saved fields exactly equal the preserved central-fan result; maximum absolute difference 0 |
-| Palm/source geometry replay | Triangle coordinates, masks, display mesh and frond axes exactly equal |
-| Main calculation | 1800 s, 0.5 m target cells, 0.5 s maximum steps |
-| Numerical screens | 300 s grid refinement and 300 s smaller-step runs reproduced |
-| Source and inventory checks | PASS: leaf area, total exchange, first sealed analytic balance, moving volume, incompressibility and saved-field statistics |
-| Grid sensitivity | **FAIL**: 6.867% spatial standard-deviation change against 5%; mean speed changes 4.053% |
-| Time-step sensitivity | PASS: 0.559% spatial standard-deviation change; mean speed changes 0.550% |
-| Original-workspace component tests | 138 passed, including independent transport/flow checks and changed-input tests |
-| Clean source-only checkout | 79 included tests passed with only the locked public dependencies |
-| Full default rendering | Four MP4/GIF pairs; full decoding, colour-range and white-corner checks pass |
-| Changed-input complete bundles | Zero-fan/zero-source control and independent one-fan/positive-release run pass, including all four media views |
-| Physical archive | 24,120 pre-change files preserved; two replaced navigation guides retained in recovery |
-| Path lookup tests | 3 passed |
+| Main run | Complete: 1800 s, 0.5 m target cells, 0.5 s maximum steps |
+| Numerical screens | Complete: first 300 s, 1/3 m grid and 0.25 s step |
+| Saved fields and leaf-source maps | 243 of each across the three cases |
+| Simulated closed-region volume | 96 m³ in all cases, independently checked from saved cell intersections |
+| First-closure analytical mean | 396.605389 ppm; maximum main-run error 1.46e-07 ppm |
+| Main CO₂ inventory residual | Maximum fraction 2.41e-08 |
+| Main incompressibility residual | Maximum 7.09e-10 s⁻¹ |
+| Moving-volume residual | Main maximum 1.22e-12 m³ |
+| Leaflet allocation and saved-field statistics | PASS; uptake is continuous and excluded from trunk/bare frond axes |
+| Grid sensitivity | **FAIL**: 5.834% spatial-standard-deviation change against 5%; mean speed changes 4.245% |
+| Time-step sensitivity | PASS: 1.124% spatial-standard-deviation change; mean speed changes 0.541% |
+| Component tests | 137 passed, 1 skipped, 400.13 s; skipped historical-fixture parity test is separate from this complete run |
+| Media | All four MP4/GIF pairs decode; white backgrounds and unclipped viridis scales pass |
+| Visual review | Cycle closure/opening, fan section, operation plot, source location and updated fan-height schematic inspected |
+| Palm/source preservation | All seven geometry arrays exactly equal the previous result |
+| Previous result preservation | All 592 files retain their pre-move SHA-256 hashes |
 
-The independent fresh-environment run changed chamber width/height, wind speed
-and direction, fan count and azimuth, exchange sign and operating timing. Separate
-integration tests also exercise four fans, uptake, release and zero exchange.
-No older result, private data table, notebook or installed PalmTwin package was
-available in that source-only checkout. It uses Python 3.12.13 and the committed
-runtime pins; the reference media encoder is FFmpeg 8.1.
+Detailed current records are `verification/checks.json` and
+`verification/bundle_manifest.json` inside the result. The local revision and
+recovery record is `simulation/maintenance/2026-09-14-operating-size-revision/`.
 
-The selected `c2_central_fans` result remains byte-identical. Temporary reruns,
-logs, complete field comparisons, media hashes, before-state records and archive
-move checks are local under
-`simulation/maintenance/2026-09-12-operating-workflow/`.
-The default reproduction's `verification/checks.json` and
-`verification/bundle_manifest.json` contain its detailed checks and hashes.
+## Historical 3.7 m result
 
-Privacy: no observation rows, holdouts, private data-selection files, Blender/CAD
-assets, local paths to raw observations, generated runs or archives are included
-in the publication allowlist. The single explicit prescribed rate is an authorized
-diagnostic input, not a new observational data release. The publication uses a
-separate root branch containing only the reviewed workflow and dependencies; the
-existing local branch/history and unrelated dirty work remain preserved.
+The 13 September portable-workflow verification concerned the previous
+**88.8 m³** geometry. Its numerical replay was exactly equal across 243 saved
+fields; the grid screen failed at 6.867% spatial variation, and the time-step
+screen passed at 0.559%. The earlier source-only checkout passed 79 tests.
+These historical values do not describe the revised 96 m³ run. The previous
+bundle is now in `archive/2026-09-14-before-size-revision/c2_central_fans`;
+its inputs remain recoverable from source commit
+`39ad6840cfe712cf0e986116701f9f81ba547615` and the earlier maintenance record.
 
-Limits remain: assumed installed fan performance and pole position, unresolved
-pole blockage, schematic leaflets, conditional source/geometry identity, no
-dynamic leaf physiology, and no established opening-grid convergence. A code
-replay or successful media audit cannot remove the failed grid screen.
+## Scientific, privacy and recovery limits
+
+These are implementation and numerical checks, not empirical validation.
+Installed clear dimensions, fan performance and pole position remain assumed;
+pole blockage is unresolved, leaflets are schematic and physiology is prescribed.
+The −44.40047791098563 µmol/s source retains its February 2025 Q95 provenance;
+it is not a new 2026 observation. No observation reprocessing or rate rescaling
+was performed when changing the chamber height. The grid screen still fails,
+and opening-grid convergence remains unestablished.
+
+Only the existing portable source allowlist is eligible for the authorized
+private Git update. Raw observations, holdouts, CAD, private data-selection
+workflows, outputs, archives and environments remain local. Existing unrelated
+working-branch changes remain preserved. A source commit is not a remote backup
+of the result videos or archived evidence.

@@ -2,7 +2,10 @@
 
 The owner's 12 September 2026 instruction selects
 `runs/03_reference_chamber/c2_central_fans` as the current operating-design
-reference and archives every other existing result study. Preserve that bundle.
+reference and archives every other existing result study. On 14 September the
+owner adopted the documented nominal 6 × 4 × 4 m size. The revised bundle is
+current at that path; its 3.7 m predecessor is preserved in
+archive/2026-09-14-before-size-revision/c2_central_fans.
 Use the physical folder layout; do not create a results HTML dashboard.
 
 Read README.md, docs/operating/INPUTS.md, METHOD.md and REPRODUCING.md.
@@ -13,7 +16,9 @@ branches, private data-selection workflows and generated outputs are preserved.
 Do not sweep them into a push. No force push, raw-data upload or broad git add.
 
 The runtime is the existing NumPy/SciPy conservative moving-mesh solver, not
-PhiFlow or WaterLily. Chamber dimensions are 4 × 6 × 3.7 m at default settings.
+PhiFlow or WaterLily. Chamber dimensions are nominal 4 × 6 × 4 m (solver x/y/z), 96 m³, at
+default settings. Design width/depth are 6/4 m. The floor remains an assumed
+0.6 m; installed inside dimensions are not field verified.
 The prescribed February 2025 net source is not a current-year observation or
 gross leaf photosynthesis. Fans add momentum only; uptake continues all phases
 on representative leaflets. No pole blockage or dynamic leaf physiology is solved.

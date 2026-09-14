@@ -11,7 +11,7 @@ Use SI units except CO₂ in ppm, exchange in µmol/s and the stated fan CFM rat
 | `title` | Operating chamber… | Figure title; use a short description |
 | `chamber.width_m` | 4 | Closed interior x dimension; shells slide along x |
 | `chamber.depth_m` | 6 | Closed interior y dimension |
-| `chamber.height_m` | 3.7 | Airspace height, excluding the elevated floor |
+| `chamber.height_m` | 4 | Nominal airspace height, excluding the elevated floor |
 | `chamber.floor_m` | 0.6 | Floor elevation above exterior ground |
 | `chamber.maximum_gap_m` | 2 | Gap between halves; each half travels gap/2 |
 | `domain.x_m`, `y_m`, `z_m` | null | Null gives width + gap + 8, depth + 4, floor + height + 4.7 m; these are exterior extents, not chamber size |
@@ -60,6 +60,27 @@ Use SI units except CO₂ in ppm, exchange in µmol/s and the stated fan CFM rat
 | `screens.relative_tolerance` | 0.05 | Relative RMS screen threshold; engineering criterion, not field validation |
 | `display.co2_min_ppm`, `co2_max_ppm` | 380, 405 | Preferred fixed linear viridis scale; expanded outward if actual extrema exceed it |
 | `display.fps` | 6 | Encoded frames per second; physical simulation time is printed separately |
+
+## Geometry decision, 14 September 2026
+
+The owner adopted the recent documentation's nominal **6 m design width ×
+4 m design depth × 4 m clear height**. Solver x is the sliding direction, so
+the configuration lists `width_m=4`, `depth_m=6`, `height_m=4`: **96 m³**.
+The August 28 LIBZ budget request describes an existing 6 × 4 × 4 m chamber;
+the September upsizing presentation labels the same size as approximate
+width × depth × clear height. These are documentary dimensions, not an
+inside-to-inside field survey. The previous 3.7 m height came from the CAD
+glazing envelope and is preserved with its earlier result.
+
+The floor remains a prescribed 0.6 m above ground, placing the new roof at
+4.6 m. Automatic fan heights are **0.667, 2.000 and 3.333 m above the floor**;
+the automatically sized external domain is 14 × 10 × 9.3 m. The palm and
+prescribed net uptake retain their previous values. This geometry change
+does not reprocess or rescale the historical observation-derived uptake.
+
+The local documentary evidence and source hashes are retained in
+`simulation/maintenance/2026-09-13-chamber-size-inspection/`. Those private
+documents are not required by, or included in, the portable source repository.
 
 Example overrides (quote lists and text at the shell):
 

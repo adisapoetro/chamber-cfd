@@ -1,10 +1,15 @@
 # How the operating-chamber simulation works
 
-This is the owner-selected **4 × 6 × 3.7 m operating chamber**, with two sliding
+This is the owner-selected **4 × 6 × 4 m nominal operating chamber**, with two sliding
 halves, an elevated floor and a palm inside. The current configuration has three
 fans on a fixed pole approximately 0.30 m beside the trunk. They sit at
-0.617, 1.850 and 3.083 m above the floor, blowing toward 0°, 120° and 240°.
+0.667, 2.000 and 3.333 m above the floor, blowing toward 0°, 120° and 240°.
 The support location and absolute direction are prescribed approximations.
+The design documents call the plan dimensions 6 m width × 4 m depth; the
+solver's x/y names are reversed because x follows sliding travel. The resulting
+rectangular air volume is 96 m³. The owner adopted the documented nominal
+4 m clear height on 14 September 2026; installed inside dimensions and net
+air volume remain unverified. The floor datum remains the assumed 0.6 m.
 
 The Python runtime is `fluid_dynamic.operating` →
 `fluid_dynamic.recreated.fan_solver`, using NumPy/SciPy finite-volume operators
@@ -113,10 +118,13 @@ The scale expands to include calculated extrema; it does not clip inconvenient
 values. Frames come from saved fields at printed physical times; repeated frames
 slow the display during wall movement without interpolating CFD fields.
 
-The accepted default passed inventory, moving-volume, source-area, saved-field
-and sealed-mean checks. Its first-closure grid screen **failed** the 5% criterion
-(about 6.87% change in spatial standard deviation); the smaller-step screen passed
-(about 0.56%). Opening-grid convergence remains unestablished. These engineering
+Each completed run records inventory, moving-volume, source-area, saved-field
+and sealed-mean checks in `verification/checks.json`. Read the same file for
+that run's first-closure grid and time-step sensitivity results. The previous
+3.7 m run failed the grid screen (about 6.87% change in spatial standard
+deviation against 5%) and passed the time-step screen (about 0.56%); those
+numbers do not describe the revised 4 m run. Opening-grid convergence remains
+unestablished. These engineering
 checks do not validate installed fan performance, leaf physiology or actual
 chamber mixing time. The original uptake-to-geometry transfer and plant identity
 remain conditional. Selecting this as the current design does not remove those

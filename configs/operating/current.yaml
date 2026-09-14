@@ -1,11 +1,13 @@
 # Owner-selected operating chamber. Units are in each key. See docs/operating/INPUTS.md.
 # Negative exchange removes CO2. null fan lists = evenly spaced heights/directions.
+# Owner adopted documented nominal 6 m W × 4 m D × 4 m clear H on 2026-09-14.
+# Solver x/y below are the design's depth/width. Inside dimensions remain unmeasured.
 schema_version: 1
-title: Operating chamber · central fans and leaf uptake
+title: C2 · nominal 4 m chamber · leaf uptake
 chamber:
   width_m: 4.0
   depth_m: 6.0
-  height_m: 3.7
+  height_m: 4.0
   floor_m: 0.6
   maximum_gap_m: 2.0
 domain:

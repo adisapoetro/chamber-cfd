@@ -17,7 +17,9 @@ ROOT=Path(__file__).resolve().parents[2]
 def test_operating_schedule_and_three_fans():
     study=compile_study(Inputs()); case=study['cases']['main']
     cfg=ScenarioStudy(**case['config']); f=FanArray(**case['fans'])
-    assert cfg.width*cfg.depth*cfg.height == pytest.approx(88.8)
+    assert cfg.width*cfg.depth*cfg.height == pytest.approx(96.0)
+    np.testing.assert_allclose(f.heights_above_floor_m, [2/3, 2, 10/3])
+    assert ScenarioMesh(cfg,0).reporting_weights('fixed').sum() == pytest.approx(96.0)
     assert cfg.duration_s==1800
     for t,gap,on in [(0,0,True),(300,0,False),(310,1,False),(320,2,False),
                      (880,2,False),(890,1,False),(900,0,True),(1800,0,True)]:

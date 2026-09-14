@@ -32,8 +32,11 @@ platform versions, configuration hashes and every executed source file.
   --output runs/03_reference_chamber/reproduction --workers 2
 ```
 
-A fresh directory is mandatory. The owner-selected historical result stays at
-`runs/03_reference_chamber/c2_central_fans`. The new default runs 1800 s with
+A fresh directory is mandatory. The active result stays at
+`runs/03_reference_chamber/c2_central_fans`; its previous 3.7 m version is
+preserved under `archive/2026-09-14-before-size-revision/c2_central_fans`.
+The default geometry is now nominal 4 × 6 × 4 m (96 m³), adopted by the owner
+on 14 September 2026. It runs 1800 s with
 0.5 m target cells and 0.5 s maximum steps, plus a 300 s 1/3 m grid screen and
 a 300 s 0.25 s time-step screen. CFD takes a few minutes on the reference machine;
 rendering the four videos takes longer. Do not confuse movie duration with
@@ -53,9 +56,9 @@ verification/        numerical/media checks, hashes and full bundle manifest
 logs/                one simulation log per case
 ```
 
-The four views match the chosen bundle's subjects. Generic filenames replace
-its historical `c2_202502_cycle` / `scenarios_timeseries` names for new runs.
-The original files retain their original names and bytes.
+The four views match the chosen bundle's subjects. The revised active bundle
+and new runs use generic filenames; the archived 3.7 m bundle retains its
+historical `c2_202502_cycle` / `scenarios_timeseries` names and original bytes.
 
 For a short engineering check:
 

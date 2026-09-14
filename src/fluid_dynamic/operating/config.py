@@ -17,7 +17,7 @@ class Strict(BaseModel):
 class Chamber(Strict):
     width_m: float = Field(4., gt=0)
     depth_m: float = Field(6., gt=0)
-    height_m: float = Field(3.7, gt=0)
+    height_m: float = Field(4.0, gt=0)
     floor_m: float = Field(.6, ge=0)
     maximum_gap_m: float = Field(2., gt=0)
 
