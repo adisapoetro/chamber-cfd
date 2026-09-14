@@ -1,0 +1,986 @@
+{
+  "scientific_status": "DIAGNOSTIC_NOT_VALIDATED",
+  "identical_inputs": true,
+  "native_velocity_and_geometry_bitwise_identical": true,
+  "before_summary_sha256": "7f0eca0f2158450d59ea8dc5aead0aa3d39934ba6c7bcaa44d654624b30403ff",
+  "after_summary_sha256": "5b64fd7c94dff4c64323b876982666de198a154f3582ac320655737c3d313746",
+  "comparator_sha256": "30f9eb544b1cabbbff586ed4bd0a2fbc2e992ffa2b27e0f329f6731d95150ddb",
+  "before_checks": {
+    "co2_max_ppm": 400.00000000005525,
+    "cumulative_budget_error_max_ppm_m3": 6.814389053033665e-09,
+    "co2_min_ppm": 390.15941681797625,
+    "roi_flux_correction_max_relative_l2": 1.6381024502277197,
+    "coupling_correction_10pct_gate": "FAIL",
+    "flux_correction_max_relative_l2": 0.047608813303140186,
+    "gcl_max_m3_s": 4.510775433730352e-13
+  },
+  "after_checks": {
+    "co2_max_ppm": 400.0000000000489,
+    "cumulative_budget_error_max_ppm_m3": 6.8796452978858724e-09,
+    "co2_min_ppm": 390.1606840420307,
+    "roi_flux_correction_max_relative_l2": 0.8791541033636003,
+    "coupling_correction_10pct_gate": "FAIL",
+    "flux_correction_max_relative_l2": 0.047608813303140186,
+    "aperture_velocity_correction_max_m_s": 133.95167959711182,
+    "one_sided_extension_faces_max": 222,
+    "one_sided_extension_area_fraction_max": 0.0013360328553489083,
+    "gcl_max_m3_s": 3.4255931424809205e-13
+  },
+  "snapshot_differences": [
+    {
+      "time_s": 0,
+      "mean_difference_ppm": 0,
+      "spatial_sd_difference_ppm": 0
+    },
+    {
+      "time_s": 10,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": -5.551115123125783e-15
+    },
+    {
+      "time_s": 20,
+      "mean_difference_ppm": 5.684341886080802e-14,
+      "spatial_sd_difference_ppm": -3.552713678800501e-15
+    },
+    {
+      "time_s": 30,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": -1.609823385706477e-15
+    },
+    {
+      "time_s": 40,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": -1.1657341758564144e-15
+    },
+    {
+      "time_s": 50,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 4.996003610813204e-16
+    },
+    {
+      "time_s": 60,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 1.2212453270876722e-15
+    },
+    {
+      "time_s": 70,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 1.3877787807814457e-15
+    },
+    {
+      "time_s": 80,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": -2.0539125955565396e-15
+    },
+    {
+      "time_s": 89.99999999999997,
+      "mean_difference_ppm": 5.684341886080802e-14,
+      "spatial_sd_difference_ppm": 1.609823385706477e-15
+    },
+    {
+      "time_s": 100,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 5.662137425588298e-15
+    },
+    {
+      "time_s": 110,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 6.439293542825908e-15
+    },
+    {
+      "time_s": 120,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 1.0880185641326534e-14
+    },
+    {
+      "time_s": 130,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 1.3322676295501878e-14
+    },
+    {
+      "time_s": 140,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 1.1435297153639112e-14
+    },
+    {
+      "time_s": 150,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 1.0325074129013956e-14
+    },
+    {
+      "time_s": 160,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 9.992007221626409e-15
+    },
+    {
+      "time_s": 170.00000000000003,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 1.3322676295501878e-14
+    },
+    {
+      "time_s": 180,
+      "mean_difference_ppm": -5.684341886080802e-14,
+      "spatial_sd_difference_ppm": 1.1324274851176597e-14
+    },
+    {
+      "time_s": 190,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 7.216449660063518e-15
+    },
+    {
+      "time_s": 200,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 9.769962616701378e-15
+    },
+    {
+      "time_s": 210,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 5.10702591327572e-15
+    },
+    {
+      "time_s": 220,
+      "mean_difference_ppm": -1.1368683772161603e-13,
+      "spatial_sd_difference_ppm": -2.220446049250313e-15
+    },
+    {
+      "time_s": 230,
+      "mean_difference_ppm": 5.684341886080802e-14,
+      "spatial_sd_difference_ppm": -2.1094237467877974e-15
+    },
+    {
+      "time_s": 240,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": -3.3306690738754696e-15
+    },
+    {
+      "time_s": 249.99999999999994,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 2.4424906541753444e-15
+    },
+    {
+      "time_s": 260,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": -4.440892098500626e-16
+    },
+    {
+      "time_s": 270,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": -6.661338147750939e-16
+    },
+    {
+      "time_s": 280,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 1.4432899320127035e-15
+    },
+    {
+      "time_s": 290,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": 1.0436096431476471e-14
+    },
+    {
+      "time_s": 300,
+      "mean_difference_ppm": 0.0,
+      "spatial_sd_difference_ppm": -2.716991294171578e-07
+    },
+    {
+      "time_s": 310,
+      "mean_difference_ppm": -2.564005956173787e-05,
+      "spatial_sd_difference_ppm": -0.00017905290726805134
+    },
+    {
+      "time_s": 320,
+      "mean_difference_ppm": -0.00038171052688085183,
+      "spatial_sd_difference_ppm": 0.00038827506219485386
+    },
+    {
+      "time_s": 329.99999999999994,
+      "mean_difference_ppm": -0.00016787330531542466,
+      "spatial_sd_difference_ppm": 0.00031753380303300993
+    },
+    {
+      "time_s": 340,
+      "mean_difference_ppm": -3.204831688208287e-05,
+      "spatial_sd_difference_ppm": 0.00016928931791848623
+    },
+    {
+      "time_s": 350,
+      "mean_difference_ppm": 3.967838381413458e-06,
+      "spatial_sd_difference_ppm": 6.568745039647883e-05
+    },
+    {
+      "time_s": 360,
+      "mean_difference_ppm": 3.668447089921756e-05,
+      "spatial_sd_difference_ppm": 1.4756935362569834e-06
+    },
+    {
+      "time_s": 370.00000000000006,
+      "mean_difference_ppm": 5.781217265621308e-05,
+      "spatial_sd_difference_ppm": -2.697123306649729e-05
+    },
+    {
+      "time_s": 379.99999999999994,
+      "mean_difference_ppm": 6.795415788474202e-05,
+      "spatial_sd_difference_ppm": -4.114608027294686e-05
+    },
+    {
+      "time_s": 390,
+      "mean_difference_ppm": 6.96643830906396e-05,
+      "spatial_sd_difference_ppm": -4.8943593221162374e-05
+    },
+    {
+      "time_s": 400,
+      "mean_difference_ppm": 6.644888452456144e-05,
+      "spatial_sd_difference_ppm": -5.16101812458869e-05
+    },
+    {
+      "time_s": 410,
+      "mean_difference_ppm": 6.188471252244199e-05,
+      "spatial_sd_difference_ppm": -5.106107475727484e-05
+    },
+    {
+      "time_s": 420,
+      "mean_difference_ppm": 5.7629489219834795e-05,
+      "spatial_sd_difference_ppm": -4.906720403607956e-05
+    },
+    {
+      "time_s": 430,
+      "mean_difference_ppm": 5.3814130751561606e-05,
+      "spatial_sd_difference_ppm": -4.643652614988447e-05
+    },
+    {
+      "time_s": 440.00000000000006,
+      "mean_difference_ppm": 5.012903932311019e-05,
+      "spatial_sd_difference_ppm": -4.3335575597103215e-05
+    },
+    {
+      "time_s": 450,
+      "mean_difference_ppm": 4.6385263431147905e-05,
+      "spatial_sd_difference_ppm": -4.0089248833474755e-05
+    },
+    {
+      "time_s": 460.00000000000006,
+      "mean_difference_ppm": 4.258299958337375e-05,
+      "spatial_sd_difference_ppm": -3.66950933783361e-05
+    },
+    {
+      "time_s": 470,
+      "mean_difference_ppm": 3.888306417820786e-05,
+      "spatial_sd_difference_ppm": -3.3434851255731424e-05
+    },
+    {
+      "time_s": 480.00000000000006,
+      "mean_difference_ppm": 3.537851051760299e-05,
+      "spatial_sd_difference_ppm": -3.0406766376778194e-05
+    },
+    {
+      "time_s": 490,
+      "mean_difference_ppm": 3.2160470595954394e-05,
+      "spatial_sd_difference_ppm": -2.7742686019682772e-05
+    },
+    {
+      "time_s": 500,
+      "mean_difference_ppm": 2.9436536806315416e-05,
+      "spatial_sd_difference_ppm": -2.545849322910243e-05
+    },
+    {
+      "time_s": 510.00000000000006,
+      "mean_difference_ppm": 2.7308561129757436e-05,
+      "spatial_sd_difference_ppm": -2.337014355646705e-05
+    },
+    {
+      "time_s": 519.9999999999999,
+      "mean_difference_ppm": 2.559432209636725e-05,
+      "spatial_sd_difference_ppm": -2.112113055841025e-05
+    },
+    {
+      "time_s": 530,
+      "mean_difference_ppm": 2.4082335585262626e-05,
+      "spatial_sd_difference_ppm": -1.9055592041405944e-05
+    },
+    {
+      "time_s": 540.0000000000001,
+      "mean_difference_ppm": 2.286088681557885e-05,
+      "spatial_sd_difference_ppm": -1.76277335676156e-05
+    },
+    {
+      "time_s": 550,
+      "mean_difference_ppm": 2.1870418947855796e-05,
+      "spatial_sd_difference_ppm": -1.6638888730158286e-05
+    },
+    {
+      "time_s": 559.9999999999999,
+      "mean_difference_ppm": 2.1023683530074777e-05,
+      "spatial_sd_difference_ppm": -1.597067911984773e-05
+    },
+    {
+      "time_s": 569.9999999999999,
+      "mean_difference_ppm": 2.0282510831748368e-05,
+      "spatial_sd_difference_ppm": -1.5445079144082996e-05
+    },
+    {
+      "time_s": 580,
+      "mean_difference_ppm": 1.9560245732463954e-05,
+      "spatial_sd_difference_ppm": -1.4941961764436407e-05
+    },
+    {
+      "time_s": 590,
+      "mean_difference_ppm": 1.8839540359749662e-05,
+      "spatial_sd_difference_ppm": -1.4467892642922031e-05
+    },
+    {
+      "time_s": 600,
+      "mean_difference_ppm": 1.8148188189570647e-05,
+      "spatial_sd_difference_ppm": -1.4036460704747178e-05
+    },
+    {
+      "time_s": 610,
+      "mean_difference_ppm": 1.750213704099224e-05,
+      "spatial_sd_difference_ppm": -1.3649628433975991e-05
+    },
+    {
+      "time_s": 620,
+      "mean_difference_ppm": 1.6914708339754725e-05,
+      "spatial_sd_difference_ppm": -1.3311682512395784e-05
+    },
+    {
+      "time_s": 629.9999999999999,
+      "mean_difference_ppm": 1.6380434260554466e-05,
+      "spatial_sd_difference_ppm": -1.3011372197335724e-05
+    },
+    {
+      "time_s": 640,
+      "mean_difference_ppm": 1.5876943052717252e-05,
+      "spatial_sd_difference_ppm": -1.2714146342851507e-05
+    },
+    {
+      "time_s": 650.0000000000001,
+      "mean_difference_ppm": 1.539061111088813e-05,
+      "spatial_sd_difference_ppm": -1.2394643239543868e-05
+    },
+    {
+      "time_s": 660,
+      "mean_difference_ppm": 1.4911580592524842e-05,
+      "spatial_sd_difference_ppm": -1.2054567107733227e-05
+    },
+    {
+      "time_s": 670,
+      "mean_difference_ppm": 1.443440550019659e-05,
+      "spatial_sd_difference_ppm": -1.169206219642227e-05
+    },
+    {
+      "time_s": 680,
+      "mean_difference_ppm": 1.3959480384073686e-05,
+      "spatial_sd_difference_ppm": -1.1316781458159397e-05
+    },
+    {
+      "time_s": 690,
+      "mean_difference_ppm": 1.3491965773937409e-05,
+      "spatial_sd_difference_ppm": -1.0937048808501437e-05
+    },
+    {
+      "time_s": 700.0000000000001,
+      "mean_difference_ppm": 1.3036649932018918e-05,
+      "spatial_sd_difference_ppm": -1.056231385299089e-05
+    },
+    {
+      "time_s": 710,
+      "mean_difference_ppm": 1.25949017046878e-05,
+      "spatial_sd_difference_ppm": -1.0195011252656094e-05
+    },
+    {
+      "time_s": 720,
+      "mean_difference_ppm": 1.2166368946964212e-05,
+      "spatial_sd_difference_ppm": -9.837632524600792e-06
+    },
+    {
+      "time_s": 730,
+      "mean_difference_ppm": 1.1750571218271944e-05,
+      "spatial_sd_difference_ppm": -9.493652839309696e-06
+    },
+    {
+      "time_s": 740,
+      "mean_difference_ppm": 1.1346841347403824e-05,
+      "spatial_sd_difference_ppm": -9.162714838861774e-06
+    },
+    {
+      "time_s": 750,
+      "mean_difference_ppm": 1.0955795403333468e-05,
+      "spatial_sd_difference_ppm": -8.844439997379716e-06
+    },
+    {
+      "time_s": 760,
+      "mean_difference_ppm": 1.057858224839947e-05,
+      "spatial_sd_difference_ppm": -8.539568875032266e-06
+    },
+    {
+      "time_s": 770.0000000000001,
+      "mean_difference_ppm": 1.0215997747309302e-05,
+      "spatial_sd_difference_ppm": -8.247841901010133e-06
+    },
+    {
+      "time_s": 780,
+      "mean_difference_ppm": 9.867761662007979e-06,
+      "spatial_sd_difference_ppm": -7.969288294051857e-06
+    },
+    {
+      "time_s": 790,
+      "mean_difference_ppm": 9.532748208584962e-06,
+      "spatial_sd_difference_ppm": -7.70225698421001e-06
+    },
+    {
+      "time_s": 800.0000000000001,
+      "mean_difference_ppm": 9.210008670379466e-06,
+      "spatial_sd_difference_ppm": -7.4450979582474375e-06
+    },
+    {
+      "time_s": 810,
+      "mean_difference_ppm": 8.899036913589953e-06,
+      "spatial_sd_difference_ppm": -7.196538650444673e-06
+    },
+    {
+      "time_s": 820,
+      "mean_difference_ppm": 8.599481702731282e-06,
+      "spatial_sd_difference_ppm": -6.9556686242977506e-06
+    },
+    {
+      "time_s": 830,
+      "mean_difference_ppm": 8.310841337788588e-06,
+      "spatial_sd_difference_ppm": -6.722457405627935e-06
+    },
+    {
+      "time_s": 840,
+      "mean_difference_ppm": 8.032818186620716e-06,
+      "spatial_sd_difference_ppm": -6.497072626010514e-06
+    },
+    {
+      "time_s": 850,
+      "mean_difference_ppm": 7.765124280467717e-06,
+      "spatial_sd_difference_ppm": -6.279529716324284e-06
+    },
+    {
+      "time_s": 860,
+      "mean_difference_ppm": 7.507481598167942e-06,
+      "spatial_sd_difference_ppm": -6.069565893662698e-06
+    },
+    {
+      "time_s": 870,
+      "mean_difference_ppm": 7.259532765147014e-06,
+      "spatial_sd_difference_ppm": -5.867122504943367e-06
+    },
+    {
+      "time_s": 880,
+      "mean_difference_ppm": -7.893687808291361e-05,
+      "spatial_sd_difference_ppm": 1.378377452865287e-05
+    },
+    {
+      "time_s": 890,
+      "mean_difference_ppm": -4.425600320701051e-05,
+      "spatial_sd_difference_ppm": 7.72852042822958e-05
+    },
+    {
+      "time_s": 900,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -0.00014944524879267895
+    },
+    {
+      "time_s": 910,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -0.00013514091437061282
+    },
+    {
+      "time_s": 920,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -0.00010981549852651096
+    },
+    {
+      "time_s": 930,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -8.229748333282716e-05
+    },
+    {
+      "time_s": 940,
+      "mean_difference_ppm": 0.0003762514569984887,
+      "spatial_sd_difference_ppm": -5.3734740151689664e-05
+    },
+    {
+      "time_s": 950,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -3.273316383078928e-05
+    },
+    {
+      "time_s": 960,
+      "mean_difference_ppm": 0.0003762514568848019,
+      "spatial_sd_difference_ppm": -2.2754733111474135e-05
+    },
+    {
+      "time_s": 970,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -1.841822630110901e-05
+    },
+    {
+      "time_s": 980,
+      "mean_difference_ppm": 0.0003762514569416453,
+      "spatial_sd_difference_ppm": -1.5984504487420725e-05
+    },
+    {
+      "time_s": 990,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -1.4341107239690398e-05
+    },
+    {
+      "time_s": 1000,
+      "mean_difference_ppm": 0.0003762514569416453,
+      "spatial_sd_difference_ppm": -1.3190115431216398e-05
+    },
+    {
+      "time_s": 1010,
+      "mean_difference_ppm": 0.00037625145711217556,
+      "spatial_sd_difference_ppm": -1.2259852248730496e-05
+    },
+    {
+      "time_s": 1020,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -1.145421206666386e-05
+    },
+    {
+      "time_s": 1030,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -1.0756993347182942e-05
+    },
+    {
+      "time_s": 1040,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -1.0132358600034586e-05
+    },
+    {
+      "time_s": 1050,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -9.597427878760278e-06
+    },
+    {
+      "time_s": 1059.9999999999998,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -9.146563113016093e-06
+    },
+    {
+      "time_s": 1070,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -8.738267676888789e-06
+    },
+    {
+      "time_s": 1079.9999999999998,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -8.37210065030014e-06
+    },
+    {
+      "time_s": 1090,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -8.044907939708246e-06
+    },
+    {
+      "time_s": 1100,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -7.751919589460421e-06
+    },
+    {
+      "time_s": 1110,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -7.488173926151198e-06
+    },
+    {
+      "time_s": 1120,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -7.252252985145979e-06
+    },
+    {
+      "time_s": 1130,
+      "mean_difference_ppm": 0.00037625145711217556,
+      "spatial_sd_difference_ppm": -7.0369699927130824e-06
+    },
+    {
+      "time_s": 1140,
+      "mean_difference_ppm": 0.000376251457169019,
+      "spatial_sd_difference_ppm": -6.83724936689778e-06
+    },
+    {
+      "time_s": 1150,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -6.655799491328551e-06
+    },
+    {
+      "time_s": 1160,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -6.487563148693809e-06
+    },
+    {
+      "time_s": 1170,
+      "mean_difference_ppm": 0.000376251457169019,
+      "spatial_sd_difference_ppm": -6.329027846918578e-06
+    },
+    {
+      "time_s": 1180.0000000000002,
+      "mean_difference_ppm": 0.00037625145711217556,
+      "spatial_sd_difference_ppm": -6.1774867803343625e-06
+    },
+    {
+      "time_s": 1190,
+      "mean_difference_ppm": 0.000376251457169019,
+      "spatial_sd_difference_ppm": -6.029563781040359e-06
+    },
+    {
+      "time_s": 1200,
+      "mean_difference_ppm": 0.00037625145705533214,
+      "spatial_sd_difference_ppm": -6.180466989524902e-06
+    },
+    {
+      "time_s": 1210,
+      "mean_difference_ppm": 0.0002567986120993737,
+      "spatial_sd_difference_ppm": -0.00028595619341142964
+    },
+    {
+      "time_s": 1220,
+      "mean_difference_ppm": -0.00024523179030211395,
+      "spatial_sd_difference_ppm": 0.00035289347196876264
+    },
+    {
+      "time_s": 1230,
+      "mean_difference_ppm": 6.141025778561016e-06,
+      "spatial_sd_difference_ppm": 0.0002716809757703498
+    },
+    {
+      "time_s": 1240,
+      "mean_difference_ppm": 0.00014942927617767054,
+      "spatial_sd_difference_ppm": 9.313537929789284e-05
+    },
+    {
+      "time_s": 1250,
+      "mean_difference_ppm": 0.0001723782086742176,
+      "spatial_sd_difference_ppm": -2.7452301399000234e-05
+    },
+    {
+      "time_s": 1260,
+      "mean_difference_ppm": 0.0001928362262333394,
+      "spatial_sd_difference_ppm": -9.781134777586686e-05
+    },
+    {
+      "time_s": 1270,
+      "mean_difference_ppm": 0.00020177757050987566,
+      "spatial_sd_difference_ppm": -0.0001267648178646663
+    },
+    {
+      "time_s": 1280,
+      "mean_difference_ppm": 0.0001994933325590864,
+      "spatial_sd_difference_ppm": -0.00013959360569493207
+    },
+    {
+      "time_s": 1290,
+      "mean_difference_ppm": 0.00018830881793974186,
+      "spatial_sd_difference_ppm": -0.00014438295416963065
+    },
+    {
+      "time_s": 1300,
+      "mean_difference_ppm": 0.00017251926914241267,
+      "spatial_sd_difference_ppm": -0.00014274631084787437
+    },
+    {
+      "time_s": 1310,
+      "mean_difference_ppm": 0.00015670883942675573,
+      "spatial_sd_difference_ppm": -0.00013713302844831077
+    },
+    {
+      "time_s": 1320,
+      "mean_difference_ppm": 0.00014271763029682916,
+      "spatial_sd_difference_ppm": -0.000129659977930352
+    },
+    {
+      "time_s": 1330,
+      "mean_difference_ppm": 0.00013043354397268558,
+      "spatial_sd_difference_ppm": -0.00012142001616644027
+    },
+    {
+      "time_s": 1340,
+      "mean_difference_ppm": 0.00011932248145285484,
+      "spatial_sd_difference_ppm": -0.00011268941259801046
+    },
+    {
+      "time_s": 1350,
+      "mean_difference_ppm": 0.00010906465820426092,
+      "spatial_sd_difference_ppm": -0.0001041341889018721
+    },
+    {
+      "time_s": 1360,
+      "mean_difference_ppm": 9.956335986771592e-05,
+      "spatial_sd_difference_ppm": -9.574278100776823e-05
+    },
+    {
+      "time_s": 1370,
+      "mean_difference_ppm": 9.092153140954906e-05,
+      "spatial_sd_difference_ppm": -8.79920415794988e-05
+    },
+    {
+      "time_s": 1380,
+      "mean_difference_ppm": 8.31135845942299e-05,
+      "spatial_sd_difference_ppm": -8.100359706608717e-05
+    },
+    {
+      "time_s": 1390,
+      "mean_difference_ppm": 7.610559777049275e-05,
+      "spatial_sd_difference_ppm": -7.486887705632217e-05
+    },
+    {
+      "time_s": 1400,
+      "mean_difference_ppm": 7.005626508771456e-05,
+      "spatial_sd_difference_ppm": -6.959422302377227e-05
+    },
+    {
+      "time_s": 1410,
+      "mean_difference_ppm": 6.511066158054746e-05,
+      "spatial_sd_difference_ppm": -6.480290570576308e-05
+    },
+    {
+      "time_s": 1420,
+      "mean_difference_ppm": 6.1009248383925296e-05,
+      "spatial_sd_difference_ppm": -5.962038356688293e-05
+    },
+    {
+      "time_s": 1430,
+      "mean_difference_ppm": 5.744380086980527e-05,
+      "spatial_sd_difference_ppm": -5.467440586126582e-05
+    },
+    {
+      "time_s": 1440,
+      "mean_difference_ppm": 5.454876514932039e-05,
+      "spatial_sd_difference_ppm": -5.094316336540228e-05
+    },
+    {
+      "time_s": 1450,
+      "mean_difference_ppm": 5.2039999332009756e-05,
+      "spatial_sd_difference_ppm": -4.789664651372316e-05
+    },
+    {
+      "time_s": 1460,
+      "mean_difference_ppm": 4.9634014430921525e-05,
+      "spatial_sd_difference_ppm": -4.528101980072474e-05
+    },
+    {
+      "time_s": 1470,
+      "mean_difference_ppm": 4.735178117698524e-05,
+      "spatial_sd_difference_ppm": -4.291999514116629e-05
+    },
+    {
+      "time_s": 1480,
+      "mean_difference_ppm": 4.5175797993124434e-05,
+      "spatial_sd_difference_ppm": -4.071751170919846e-05
+    },
+    {
+      "time_s": 1490,
+      "mean_difference_ppm": 4.31086507433065e-05,
+      "spatial_sd_difference_ppm": -3.871996874227346e-05
+    },
+    {
+      "time_s": 1500,
+      "mean_difference_ppm": 4.1186125315562094e-05,
+      "spatial_sd_difference_ppm": -3.692813232569758e-05
+    },
+    {
+      "time_s": 1510,
+      "mean_difference_ppm": 3.940447533068436e-05,
+      "spatial_sd_difference_ppm": -3.527989332796633e-05
+    },
+    {
+      "time_s": 1520,
+      "mean_difference_ppm": 3.775119705551333e-05,
+      "spatial_sd_difference_ppm": -3.373825871366698e-05
+    },
+    {
+      "time_s": 1530,
+      "mean_difference_ppm": 3.6199652470259025e-05,
+      "spatial_sd_difference_ppm": -3.2283918402709055e-05
+    },
+    {
+      "time_s": 1540,
+      "mean_difference_ppm": 3.471782923725186e-05,
+      "spatial_sd_difference_ppm": -3.088690032126973e-05
+    },
+    {
+      "time_s": 1549.9999999999998,
+      "mean_difference_ppm": 3.3299284496024484e-05,
+      "spatial_sd_difference_ppm": -2.9524291395022217e-05
+    },
+    {
+      "time_s": 1560,
+      "mean_difference_ppm": 3.1937988296704134e-05,
+      "spatial_sd_difference_ppm": -2.820733055264313e-05
+    },
+    {
+      "time_s": 1570,
+      "mean_difference_ppm": 3.062350799609703e-05,
+      "spatial_sd_difference_ppm": -2.692370135515265e-05
+    },
+    {
+      "time_s": 1580,
+      "mean_difference_ppm": 2.9352072942856466e-05,
+      "spatial_sd_difference_ppm": -2.5680543257244892e-05
+    },
+    {
+      "time_s": 1589.9999999999998,
+      "mean_difference_ppm": 2.8128260908033553e-05,
+      "spatial_sd_difference_ppm": -2.448555885947723e-05
+    },
+    {
+      "time_s": 1600,
+      "mean_difference_ppm": 2.695459596679939e-05,
+      "spatial_sd_difference_ppm": -2.334862122976844e-05
+    },
+    {
+      "time_s": 1610,
+      "mean_difference_ppm": 2.583058119398629e-05,
+      "spatial_sd_difference_ppm": -2.2269717002809664e-05
+    },
+    {
+      "time_s": 1620,
+      "mean_difference_ppm": 2.475479544727932e-05,
+      "spatial_sd_difference_ppm": -2.1247771194943255e-05
+    },
+    {
+      "time_s": 1630,
+      "mean_difference_ppm": 2.3725409619146376e-05,
+      "spatial_sd_difference_ppm": -2.028409830157063e-05
+    },
+    {
+      "time_s": 1640,
+      "mean_difference_ppm": 2.274010819292016e-05,
+      "spatial_sd_difference_ppm": -1.937359962878027e-05
+    },
+    {
+      "time_s": 1650,
+      "mean_difference_ppm": 2.1799713067593984e-05,
+      "spatial_sd_difference_ppm": -1.8513818972776264e-05
+    },
+    {
+      "time_s": 1660,
+      "mean_difference_ppm": 2.090447310365562e-05,
+      "spatial_sd_difference_ppm": -1.7704659591499805e-05
+    },
+    {
+      "time_s": 1670,
+      "mean_difference_ppm": 2.0054210722264543e-05,
+      "spatial_sd_difference_ppm": -1.6943062651320062e-05
+    },
+    {
+      "time_s": 1680,
+      "mean_difference_ppm": 1.9247139789513312e-05,
+      "spatial_sd_difference_ppm": -1.622753071428562e-05
+    },
+    {
+      "time_s": 1690,
+      "mean_difference_ppm": 1.848041654284316e-05,
+      "spatial_sd_difference_ppm": -1.5553844064153388e-05
+    },
+    {
+      "time_s": 1700,
+      "mean_difference_ppm": 1.77511260517349e-05,
+      "spatial_sd_difference_ppm": -1.4917298495453757e-05
+    },
+    {
+      "time_s": 1710,
+      "mean_difference_ppm": 1.705716886135633e-05,
+      "spatial_sd_difference_ppm": -1.4313820036804259e-05
+    },
+    {
+      "time_s": 1720,
+      "mean_difference_ppm": 1.6396464957324497e-05,
+      "spatial_sd_difference_ppm": -1.3739139102519893e-05
+    },
+    {
+      "time_s": 1730,
+      "mean_difference_ppm": 1.5766976673603494e-05,
+      "spatial_sd_difference_ppm": -1.3191491080699613e-05
+    },
+    {
+      "time_s": 1740,
+      "mean_difference_ppm": 1.5167144056249526e-05,
+      "spatial_sd_difference_ppm": -1.2669956972910512e-05
+    },
+    {
+      "time_s": 1750.0000000000002,
+      "mean_difference_ppm": 1.4595491677482642e-05,
+      "spatial_sd_difference_ppm": -1.2173462961118098e-05
+    },
+    {
+      "time_s": 1760,
+      "mean_difference_ppm": 1.405058446835028e-05,
+      "spatial_sd_difference_ppm": -1.1700327586572357e-05
+    },
+    {
+      "time_s": 1770,
+      "mean_difference_ppm": 1.35309355755453e-05,
+      "spatial_sd_difference_ppm": -1.124949024722266e-05
+    },
+    {
+      "time_s": 1780,
+      "mean_difference_ppm": -7.081819620680108e-05,
+      "spatial_sd_difference_ppm": 5.683472270257006e-06
+    },
+    {
+      "time_s": 1790,
+      "mean_difference_ppm": -3.2639678636314784e-05,
+      "spatial_sd_difference_ppm": 6.194713216767234e-05
+    },
+    {
+      "time_s": 1800,
+      "mean_difference_ppm": 0.0003917107819688681,
+      "spatial_sd_difference_ppm": -0.0001479018001587784
+    }
+  ],
+  "max_abs_mean_difference_ppm": 0.0003917107819688681,
+  "max_abs_spatial_sd_difference_ppm": 0.00038827506219485386,
+  "worst_steps": {
+    "before": {
+      "time_s": 1800.0,
+      "dt_s": 0.05037673534570786,
+      "roi_correction_relative_l2": 1.6381024502277197,
+      "correction_max_m_s": 130.68130608482028,
+      "raw_max_m_s": 5.074496750808421
+    },
+    "after": {
+      "time_s": 900.0,
+      "dt_s": 0.04890758967610509,
+      "roi_correction_relative_l2": 0.8791541033636003,
+      "correction_max_m_s": 133.95167959711182,
+      "raw_max_m_s": 5.082454010359033
+    }
+  },
+  "endpoints": [
+    {
+      "time_s": 300,
+      "before_roi_correction_percent": 1.5872922806483634,
+      "after_roi_correction_percent": 1.5840472615456018
+    },
+    {
+      "time_s": 320,
+      "before_roi_correction_percent": 48.86117318115035,
+      "after_roi_correction_percent": 22.423877040636434
+    },
+    {
+      "time_s": 900,
+      "before_roi_correction_percent": 163.80934333713594,
+      "after_roi_correction_percent": 87.91541033636004
+    },
+    {
+      "time_s": 1200,
+      "before_roi_correction_percent": 1.587450370225598,
+      "after_roi_correction_percent": 1.5842525185344472
+    },
+    {
+      "time_s": 1220,
+      "before_roi_correction_percent": 48.87714708192343,
+      "after_roi_correction_percent": 22.431109779634532
+    },
+    {
+      "time_s": 1800,
+      "before_roi_correction_percent": 163.81024502277197,
+      "after_roi_correction_percent": 87.89357530262487
+    }
+  ]
+}

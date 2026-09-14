@@ -17,6 +17,9 @@ def main(source, destination):
     paths = ['inputs.json','summary.json','timeseries.csv','transport_audit.csv','rendering.json','verification.json',
              'configs/source_hashes.json']
     paths += rendering['media']
+    if 'renderer_source' in rendering: paths.append(rendering['renderer_source'])
+    verification=json.loads((source/'verification.json').read_text())
+    if 'auditor_source' in verification: paths.append(verification['auditor_source'])
     for name in paths:
         target = destination/name
         target.parent.mkdir(parents=True,exist_ok=True)
@@ -28,7 +31,9 @@ three central fans and prescribed February 2025 C2 leaflet net uptake.
 
 Open [the cycle video](videos/c2_202502_cycle.mp4) or
 [the animated preview](videos/c2_202502_cycle.gif).
-The four views include fan sections, operation histories and leaflet sources.
+The five views include a [large 3D view](videos/chamber_3d.mp4), fan sections,
+operation histories and leaflet sources. The coloured planes are sections
+through the saved 3D field; dark arrows show native three-component velocity.
 
 This compact example includes media, inputs, histories and numerical audits.
 The full velocity/concentration arrays and frozen source are retained in the

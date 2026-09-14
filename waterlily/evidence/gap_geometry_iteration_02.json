@@ -1,0 +1,134 @@
+{
+    "script_sha256": "29707ed81e5a697d822fa213f13ef76e25163efbbe9ed33f1779c715d095fd9a",
+    "status": "GEOMETRY_DIAGNOSTIC_ONLY",
+    "interpretation": "The sampled kernel integral is a geometry diagnostic, not native fluid mass or physical air capacity.",
+    "geometry_sha256": "4946c3100ebc4890286340364ef61aec6df4c5b08fa98d5f71b0c7d4cad9bab6",
+    "cases": [
+        {
+            "near_closed_kernel_jump_m3": 1.3672050726772795,
+            "samples": [
+                {
+                    "sampled_domain_kernel_integral_m3": 1106.9569911186431,
+                    "gap_m": 2,
+                    "roof_seam_kernel_mobility": 1,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1106.9569911186431,
+                    "gap_m": 1,
+                    "roof_seam_kernel_mobility": 1,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1106.8488568881598,
+                    "gap_m": 0.5,
+                    "roof_seam_kernel_mobility": 0.9091549430918954,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1107.3259020992987,
+                    "gap_m": 0.25,
+                    "roof_seam_kernel_mobility": 0.7375395395196382,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1108.430602762147,
+                    "gap_m": 0.125,
+                    "roof_seam_kernel_mobility": 0.623405959900277,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1109.4615131022592,
+                    "gap_m": 0.05,
+                    "roof_seam_kernel_mobility": 0.5498973183810889,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1110.1057232418468,
+                    "gap_m": 0.01,
+                    "roof_seam_kernel_mobility": 0.5099991775735552,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1110.2771596266275,
+                    "gap_m": 1.0e-6,
+                    "roof_seam_kernel_mobility": 0.5000009999999975,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1108.9099545539502,
+                    "gap_m": 0,
+                    "roof_seam_kernel_mobility": 0,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                }
+            ],
+            "cell_m": 0.5,
+            "fixed_numerical_wall_m": 1.5
+        },
+        {
+            "near_closed_kernel_jump_m3": 1.0605564279628652,
+            "samples": [
+                {
+                    "sampled_domain_kernel_integral_m3": 1109.6415097105,
+                    "gap_m": 2,
+                    "roof_seam_kernel_mobility": 1,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1109.6415097105,
+                    "gap_m": 1,
+                    "roof_seam_kernel_mobility": 1,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1109.6415097104998,
+                    "gap_m": 0.5,
+                    "roof_seam_kernel_mobility": 1,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1109.4217783978984,
+                    "gap_m": 0.25,
+                    "roof_seam_kernel_mobility": 0.9091549430918954,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1109.7837320094568,
+                    "gap_m": 0.125,
+                    "roof_seam_kernel_mobility": 0.7375395395196382,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1110.4702215367583,
+                    "gap_m": 0.05,
+                    "roof_seam_kernel_mobility": 0.5991815821541729,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1111.0224180461817,
+                    "gap_m": 0.01,
+                    "roof_seam_kernel_mobility": 0.5199934215624034,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1111.1821770026959,
+                    "gap_m": 1.0e-6,
+                    "roof_seam_kernel_mobility": 0.500001999999995,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                },
+                {
+                    "sampled_domain_kernel_integral_m3": 1110.121620574733,
+                    "gap_m": 0,
+                    "roof_seam_kernel_mobility": 0,
+                    "sharp_domain_fluid_volume_m3": 1111.7
+                }
+            ],
+            "cell_m": 0.25,
+            "fixed_numerical_wall_m": 1.5
+        }
+    ],
+    "limitations": [
+        "No airflow or CO2 solve. Numerical walls and exterior box held fixed.",
+        "A persistent kernel jump identifies unresolved interface support; this probe does not qualify a replacement wall treatment."
+    ]
+}

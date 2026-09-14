@@ -11,6 +11,12 @@ The example uses a nominal **6 × 4 × 4 m chamber**, three central fans and a
 **5-minute closed / 10-minute open-phase** cycle. Chamber dimensions, wind,
 fan arrangement, plant size and net exchange are configurable.
 
+A separate [Julia/WaterLily project](waterlily/README.md) recreates this operating
+sequence with native WaterLily airflow and a tested Julia CO₂ extension. It
+includes [3D example videos](waterlily/examples/current_chamber/README.md) and
+an [iteration audit](waterlily/docs/ITERATIONS.md). Its moving-wall coupling
+screen still fails; the example remains a diagnostic.
+
 ## Explore the example
 
 The [central-fan example](examples/central_fans/) includes the input file,

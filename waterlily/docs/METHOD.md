@@ -97,7 +97,9 @@ $$\partial_t C+\nabla\cdot(\mathbf u C)
 
 Fans change velocity; they do not create gas or directly homogenize CO₂. Ambient
 concentration enters through inflow faces. Outflow carries local concentration
-with zero diffusive gradient. Walls and ground have zero scalar flux. There is
+with zero diffusive gradient. Stagnant exterior faces also connect to ambient
+by diffusion: zero air velocity does not switch off molecular exchange.
+Walls and ground have zero scalar flux. There is
 no ambient reset when the chamber opens.
 
 The extension integrates inventory using exact intersections with the same
@@ -132,11 +134,24 @@ WaterLily's immersed velocity blends fluid and body motion. The extension
 removes the body contribution, divides by native face mobility and integrates
 over the sharp aperture:
 
-$$Q_{raw}=A_{open}\,[u_{BDIM}-(1-\mu_0)V_{wall}]/\mu_0.$$
+$$u_f^n=[u_{BDIM}^n-(1-\mu_0^n)V_{wall}^n]/\mu_0^n.$$
+
+For a moving face, its mean flux over the step is
+
+$$Q_{raw}=\frac{1}{\Delta t}\int_{t_n}^{t_{n+1}}
+A_{open}(t)\left[(1-\theta)u_f^n+\theta u_f^{n+1}\right]dt,
+\qquad \theta=(t-t_n)/\Delta t.$$
+
+Two-point Gauss integration on each piecewise-linear geometry interval exactly
+integrates this reconstructed area–velocity product. When a face is covered
+at one endpoint, the other endpoint supplies a constant velocity extension;
+its face count and fraction of total open face area are recorded. Lack of
+support at both endpoints is an error. Static steps use end-of-step velocity.
 
 This is an interface approximation: it does not invert every first-moment BDIM
-term. Velocity is taken after the native step; body geometry for deblending is
-sampled at its midpoint. A weighted least-squares flux correction enforces the
+term. Each velocity is paired with geometry at the same time. WaterLily's
+`u⁰` retains the preceding native velocity; `u` supplies the new velocity.
+A weighted least-squares flux correction enforces the
 geometric law on the scalar fluid graph. It does not update WaterLily momentum
 or replace its pressure solver. Sealed components must have compatible volume
 balances before fixing a gauge; no mass defect is silently redistributed.

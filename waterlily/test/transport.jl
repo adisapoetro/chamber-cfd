@@ -4,6 +4,35 @@ function periodic_mesh(n)
         vec(cells),ones(Int,n),ones(n),ones(n),fill(1/n,n),fill(1/n,n),1/n)
 end
 
+function ambient_ended_mesh(n)
+    cells=vec(collect(CartesianIndices((n,1,1))));ids=reshape(collect(1:n),(n,1,1))
+    # Unit-area interval with ambient reservoirs at x=0 and x=1.
+    CW.TransportMesh((n,1,1),cells,ids,vcat(1:n-1,1,n),vcat(2:n,0,0),
+        vcat(cells[2:end],cells[[1,end]]),ones(Int,n+1),ones(n+1),ones(n+1),
+        fill(1/n,n),fill(1/n,n),1/n)
+end
+
+@testset "Stagnant ambient reservoirs diffuse without wind" begin
+    errors=Float64[]
+    for n in [32,64]
+        mesh=ambient_ended_mesh(n);x=((1:n).-0.5)./n
+        c=400 .-10sin.(pi.*x);D=.1;t=.1
+        steps=ceil(Int,t/(.5/n^2));dt=t/steps;budget=0.
+        initial=sum(mesh.old_volume.*c)
+        for _ in 1:steps
+            c,a=CW.transport_step(mesh,c,zeros(n+1),fill(D,n),zeros(n),dt,400.)
+            budget=max(budget,abs(a.budget_error_ppm_m3))
+        end
+        exact=400 .-10exp(-pi^2*D*t).*sin.(pi.*x)
+        push!(errors,sqrt(sum(abs2,c.-exact)/n))
+        @test sum(mesh.new_volume.*c)>initial
+        @test 390<=minimum(c)<=maximum(c)<=400
+        @test budget<1e-10
+    end
+    @test errors[2]<.3errors[1]
+    @test errors[2]<.001
+end
+
 @testset "Independent chamber, palm, wind, fan and uptake inputs" begin
     c=load_config(INPUT)
     c["chamber"]["width_m"]=5.;c["chamber"]["height_m"]=5.
@@ -81,6 +110,44 @@ end
         @test maximum(result)<=max(maximum(cold),400.)+1e-7
         @test abs(z.budget_error_ppm_m3)<1e-7
     end
+end
+
+@testset "Native velocity and geometry use matching times" begin
+    state=build_flow(load_config(INPUT));b=state.sim.body;sim=state.sim
+    function blended!(array,t,fluid)
+        for I in CartesianIndices(sim.flow.p),k in 1:3
+            d,_,v=WaterLily.measure(b,WaterLily.loc(k,I,Float64),t/b.dx)
+            mu=WaterLily.μ₀(d,sim.ϵ)
+            array[I,k]=mu*fluid[k]+(1-mu)*v[k]
+        end
+    end
+    fluid=SVector(.3,-.2,.1)
+    for (t0,t1) in [(300.,300.05),(899.95,900.)]
+        mesh=CW.transport_mesh(b,state.dims,t0,t1)
+        blended!(sim.flow.u⁰,t0,fluid);blended!(sim.flow.u,t1,fluid)
+        q,a=CW.waterlily_face_flux(state,mesh,t0,t1)
+        expected=mesh.orientation.*mesh.area.*fluid[mesh.direction]
+        @test maximum(abs,q.-expected)<1e-11
+        @test a.one_sided_extension_faces>0
+        @test 0<a.one_sided_extension_area_fraction<1
+    end
+    # Independently integrate a linearly changing area times a linear velocity.
+    t0=305.1;t1=305.15;mesh=CW.transport_mesh(b,state.dims,t0,t1)
+    u0=fluid;u1=fluid.+.07
+    blended!(sim.flow.u⁰,t0,u0);blended!(sim.flow.u,t1,u1)
+    q,a=CW.waterlily_face_flux(state,mesh,t0,t1)
+    boxes0=CW.shell_boxes(b,t0);boxes1=CW.shell_boxes(b,t1)
+    expected=map(eachindex(q)) do e
+        I=mesh.faces[e];k=mesh.direction[e]
+        A0=CW.open_face_area(b,I,k,boxes0);A1=CW.open_face_area(b,I,k,boxes1)
+        mesh.orientation[e]*(2A0*u0[k]+A0*u1[k]+A1*u0[k]+2A1*u1[k])/6
+    end
+    @test a.one_sided_extension_faces==0
+    @test maximum(abs,q.-expected)<1e-11
+    # Verify the native package keeps the actual previous velocity in u⁰.
+    fresh=build_flow(load_config(INPUT));initial=copy(fresh.sim.flow.u)
+    advance_flow!(fresh,.02)
+    @test fresh.sim.flow.u⁰==initial
 end
 
 @testset "Native airflow coupled to leaflet uptake through a full diagnostic cycle" begin

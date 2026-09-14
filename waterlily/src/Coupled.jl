@@ -36,7 +36,7 @@ function advance_scalar!(scalar,state,t0,t1)
         scalar.gap=gap0==gap1 ? gap1 : NaN
     end
     mesh=scalar.mesh
-    raw=waterlily_face_flux(state,mesh,(t0+t1)/2)
+    raw,mapping=waterlily_face_flux(state,mesh,t0,t1)
     q,a=compatible_flux(mesh,raw,dt;prepared=scalar.projection)
     num=c["numerics"];Cs=Float64(num["smagorinsky"]);S=state.forces.S
     D=[num["molecular_diffusivity_m2_s"]+b.dx*smagorinsky(I+CartesianIndex(1,1,1);S,Cs,Δ=1.)/num["turbulent_schmidt"] for I in mesh.cells]
@@ -52,8 +52,9 @@ function advance_scalar!(scalar,state,t0,t1)
     roi=[state.volumes[mesh.cells[mesh.left[e]]]>0 || (mesh.right[e]>0 && state.volumes[mesh.cells[mesh.right[e]]]>0) for e in eachindex(q)]
     interface=[mesh.area[e]<b.dx^2*(1-1e-10) for e in eachindex(q)]
     ratio(mask)=norm((q.-raw)[mask])/max(norm(raw[mask]),1e-30)
-    audit=merge((time_s=t1,dt_s=dt),a,z,(cumulative_budget_error_ppm_m3=accumulated,
+    audit=merge((time_s=t1,dt_s=dt),a,z,mapping,(cumulative_budget_error_ppm_m3=accumulated,
         roi_correction_relative_l2=ratio(roi),interface_correction_relative_l2=ratio(interface),
+        roi_raw_flux_l2_m3_s=norm(raw[roi]),roi_delta_flux_l2_m3_s=norm((q.-raw)[roi]),
         co2_min_ppm=minimum(C),co2_max_ppm=maximum(C),max_diffusivity_m2_s=maximum(D)))
     push!(scalar.audits,audit)
     return scalar
@@ -135,10 +136,14 @@ function run_coupled(c,out;duration_s=c["cycle"]["cycles"]*period(c))
             "co2_min_ppm"=>minimum(a.co2_min_ppm for a in audits),"co2_max_ppm"=>maximum(a.co2_max_ppm for a in audits),
             "flux_correction_max_relative_l2"=>maximum(a.correction_relative_l2 for a in audits),
             "roi_flux_correction_max_relative_l2"=>maximum(a.roi_correction_relative_l2 for a in audits),
+            "aperture_velocity_correction_max_m_s"=>maximum(a.correction_max_m_s for a in audits),
+            "one_sided_extension_faces_max"=>maximum(a.one_sided_extension_faces for a in audits),
+            "one_sided_extension_area_fraction_max"=>maximum(a.one_sided_extension_area_fraction for a in audits),
             "coupling_correction_10pct_gate"=>all(a.roi_correction_relative_l2<=.1 for a in audits) ? "PASS" : "FAIL"),
         "limitations"=>["Engineering diagnostic; no experimental validation or grid-convergence claim.",
             "Numerically thickened WaterLily walls alter external flow geometry.",
-            "Sharp scalar apertures require BDIM deblending and an audited auxiliary flux projection.",
+            "Sharp scalar apertures use endpoint-paired BDIM deblending and an audited auxiliary flux projection.",
+            "Covered or newly exposed scalar faces use a counted one-sided velocity extension; unresolved closing gaps remain a limitation.",
             "First-order upwind transport adds numerical diffusion; refinement is required for mixing claims.",
             "Fan thrust, canopy drag and support placement are prescribed approximations.",
             "February 2025 net exchange is prescribed through both phases; no dynamic photosynthesis model."])

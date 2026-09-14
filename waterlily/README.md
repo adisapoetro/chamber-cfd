@@ -45,23 +45,27 @@ not depend on another local WaterLily checkout.
 ## Results
 
 The compact repository example includes [the animated cycle](examples/current_chamber/videos/c2_202502_cycle.gif),
-[the MP4](examples/current_chamber/videos/c2_202502_cycle.mp4), all four media
-views, 24 stills and the numerical audits. See [its contents](examples/current_chamber/README.md).
+[the MP4](examples/current_chamber/videos/c2_202502_cycle.mp4), five media
+views, 30 stills and the numerical audits. The [large 3D view](examples/current_chamber/videos/chamber_3d.mp4)
+shows three perpendicular concentration sections and native 3D airflow arrows.
+See [the example contents](examples/current_chamber/README.md).
 
 The full example is written to `results/current_chamber/`:
 
 | Location within a result | Contents |
 |---|---|
-| `videos/c2_202502_cycle.mp4` and `.gif` | Palm, concentration slice, mean CO₂ and spatial variation |
+| `videos/c2_202502_cycle.mp4` and `.gif` | Palm, three concentration sections, mean CO₂ and spatial variation |
+| `videos/chamber_3d.*` | Larger 3D chamber view with the same saved fields and histories |
 | `videos/fan_sections.*` | Concentration and native airflow at the three fan heights |
 | `videos/operating_timeseries.*` | Concentration, cycle, fan and exchange histories |
 | `videos/leaf_source_location.*` | Representative leaflets and their source allocation |
-| `figures/` | Six physical-time stills for each of the four views |
+| `figures/` | Six physical-time stills for each of the five views |
 | `timeseries.csv` | Mean, spatial standard deviation, extrema and operation |
 | `transport_audit.csv` | Every-step mass balance, geometric conservation and airflow corrections |
 | `fields/` | Concentration, fluid volume, native velocity, distance and leaflet area arrays |
 | `summary.json`, `inputs.json` | Run parameters, outputs and numerical evidence |
 | `configs/source/`, `manifest.json` | Frozen generating source and SHA-256 checksums |
+| `configs/postprocessing/` | Exact renderer and auditor used for the media and checks |
 
 All figures have white backgrounds. CO₂ uses fixed viridis, normally 380–405 ppm;
 the renderer expands the limits if saved concentrations exceed them. It never
@@ -71,6 +75,8 @@ time during execution.
 The native airflow check is separate in `results/diagnostics/airflow_only/`.
 Reproduce it with `scripts/run.jl` and `scripts/render_airflow.py`; it contains
 no CO₂. Existing Python results remain in their own folders.
+The previous WaterLily bundle is preserved locally in `results/archive/iteration_01/`.
+The [iteration record](docs/ITERATIONS.md) explains changes, numerical checks and remaining failures.
 
 ## Change the experiment
 
@@ -92,3 +98,5 @@ Short sensitivity checks can be reproduced with
 `julia --project=. --threads=1 scripts/check_sensitivity.jl results/my_sensitivity.json`.
 They hold the numerical wall thickness and actual exterior box fixed when
 refining the grid. They do not establish convergence over the complete cycle.
+The [iteration guide](docs/ITERATIONS.md) also provides the moving-wall coupling
+and closing-gap geometry checks, including their failed screens.

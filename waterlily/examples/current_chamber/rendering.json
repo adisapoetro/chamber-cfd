@@ -1,5 +1,6 @@
 {
-  "renderer_sha256": "942d37ce312ab795d56352fcb6b88a1ee3fdfef064545f5425147eb64ea4dd0c",
+  "renderer_sha256": "efd5ddedb4d99a70cf28c356c191117e05a46bc7f2a14977492d033fc490bbe8",
+  "renderer_source": "configs/postprocessing/render_co2.py",
   "media_decode": "PASS",
   "media": [
     "figures/c2_202502_cycle_0000.0s.png",
@@ -8,6 +9,12 @@
     "figures/c2_202502_cycle_0320.0s.png",
     "figures/c2_202502_cycle_0900.0s.png",
     "figures/c2_202502_cycle_1800.0s.png",
+    "figures/chamber_3d_0000.0s.png",
+    "figures/chamber_3d_0300.0s.png",
+    "figures/chamber_3d_0310.0s.png",
+    "figures/chamber_3d_0320.0s.png",
+    "figures/chamber_3d_0900.0s.png",
+    "figures/chamber_3d_1800.0s.png",
     "figures/fan_sections_0000.0s.png",
     "figures/fan_sections_0300.0s.png",
     "figures/fan_sections_0310.0s.png",
@@ -28,6 +35,8 @@
     "figures/operating_timeseries_1800.0s.png",
     "videos/c2_202502_cycle.gif",
     "videos/c2_202502_cycle.mp4",
+    "videos/chamber_3d.gif",
+    "videos/chamber_3d.mp4",
     "videos/fan_sections.gif",
     "videos/fan_sections.mp4",
     "videos/leaf_source_location.gif",
@@ -40,5 +49,14 @@
     380.0,
     405.0
   ],
-  "background": "white"
+  "background": "white",
+  "views": [
+    "c2_202502_cycle",
+    "chamber_3d",
+    "fan_sections",
+    "operating_timeseries",
+    "leaf_source_location"
+  ],
+  "scalar_view": "Three orthogonal saved-field sections; no volume interpolation",
+  "velocity_view": "Saved native 3D cell-centred velocities; fixed glyph scale 0.35 s"
 }

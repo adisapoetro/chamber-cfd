@@ -1,9 +1,12 @@
 # Numerical evidence for this implementation
 
-The Julia package test run passes **320 assertions** under Julia 1.12.5 and
+The Julia package test run passes **337 assertions** under Julia 1.12.5 and
 WaterLily 1.8.0. See [the test record](../evidence/tests.json) and
 [the executable tests](../test/runtests.jl). These are implementation checks,
 not experimental validation.
+New tests cover zero-wind diffusion to ambient reservoirs and moving-face
+velocity/geometry timing. The [iteration record](ITERATIONS.md) includes the
+retained baseline and reproducible endpoint probes.
 
 Short sealed runs use the same actual 14 × 10 × 10 m exterior box and hold
 numerical wall thickness at 1.5 m. They apply identical plant, wind, fans and
@@ -36,9 +39,11 @@ The full-cycle result carries its own `verification.json`, `summary.json` and
 against the integrated source and external boundary flux. Media decoding and
 white backgrounds are checked separately.
 
-The full coarse run also fails the coupling screen at motion endpoints: the
-chamber-region correction is approximately 49% when opening finishes and 164%
-when closing finishes. This is not just a startup issue. Exact sharp fluid
+The initial full coarse run failed the coupling screen at motion endpoints:
+the chamber-region correction was approximately 49% when opening finished
+and 164% when closing finished. The endpoint-paired mapping reduces those
+first-cycle values to about 22% and 88%; they still fail. This is not just a
+startup issue. Exact sharp fluid
 volumes and the native diffuse wall field behave differently as a narrow gap
 closes. The numerically thick shells also produce an exaggerated squeeze-flow
 region. Conservation is retained, but the corrected scalar flux cannot be

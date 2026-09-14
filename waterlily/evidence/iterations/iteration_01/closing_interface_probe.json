@@ -1,0 +1,8 @@
+{
+  "purpose": "Review scalar/native geometry mismatch at the end of closure",
+  "cell_center_reconstruction_error_m_s": 4.440892098500626e-16,
+  "midpoint_geometry_roi_correction_relative_l2": 1.6380896335726083,
+  "midpoint_geometry_largest_aperture_velocity_correction_m_s": 131.66631098607226,
+  "end_geometry_mapping": "REJECTED: a time-averaged open face has zero native BDIM support at complete closure",
+  "interpretation": "The coarse closing-gap coupling is unqualified; this probe does not alter the running simulation."
+}

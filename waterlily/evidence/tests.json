@@ -1,6 +1,23 @@
 {
   "pkg_test": "PASS",
-  "assertions": 320,
+  "assertions": 337,
+  "testsets": 13,
   "julia": "1.12.5",
-  "waterlily": "1.8.0"
+  "waterlily": "1.8.0",
+  "iteration": 2,
+  "command": "julia --project=. --threads=1 -e 'using Pkg; Pkg.test()'",
+  "test_log_sha256": "d00bff06a6dc4db1596351cdd17cf6388bda3fc8cbe0f8e52ad156284b7f02e9",
+  "tested_source_sha256": {
+    "src/ChamberWaterLily.jl": "6d82459cb26e75a7a309dfb4e78ba334eac89e0cb9678a63758a977efe040f9c",
+    "src/Config.jl": "2a63861605a6096bc2bc24439789e815effb40dba83654004b805c81dc30cced",
+    "src/Coupled.jl": "9af9cac27bfa68174d619922bc7594eece5a9f8eabf3a719a9d40a1b0ec65342",
+    "src/CutCells.jl": "ebe8e1a7082e1a5401a9d7b2c6031951095fdeb84ab16ac90ea93152a3bcfb95",
+    "src/Flow.jl": "223eb511d6fe7fe1517f04793f8b2135b3da10c4a76ae234ae9c284a8a626614",
+    "src/Forcing.jl": "411a1e858f220cb02c30ec9015c0bcb44b57a770ac5f4a904033c30d74ad65d4",
+    "src/Geometry.jl": "4946c3100ebc4890286340364ef61aec6df4c5b08fa98d5f71b0c7d4cad9bab6",
+    "src/LeafSource.jl": "c8919338fd77d3ea9949e79e779fa6bbf7a8924972a2cf4f3ead56d9d924aae8",
+    "src/Transport.jl": "7338cf576927be867a8453846ac53cfdb38e694f487b81de9f69513a870d9ecf",
+    "test/runtests.jl": "2a4e1fa7e7e800c84703a0bca1ee1889e09adea4e32d857b4cb496eb3d6984fc",
+    "test/transport.jl": "d424b749aabf6edea450e6aa97902a190c81d6b11f48c3757f84087747135d14"
+  }
 }
