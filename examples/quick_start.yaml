@@ -1,0 +1,16 @@
+# Four seconds of simulated time: an installation and rendering check.
+# Other values use the reference defaults; see docs/operating/INPUTS.md.
+schema_version: 1
+title: Quick start · short chamber cycle
+cycle:
+  closed_s: 2.0
+  open_phase_s: 2.0
+  opening_travel_s: 0.5
+  closing_travel_s: 0.5
+  cycles: 1
+numerics:
+  cell_m: 1.0
+  dt_s: 0.25
+  save_every_s: 0.5
+screens:
+  enabled: false

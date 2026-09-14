@@ -129,7 +129,7 @@ def operating(axes, c, t):
     ts = c['ts']; cfg = c['cfg']
     for ax, key in zip(axes[:2], ['roi_mean_ppm', 'roi_std_ppm']):
         history(ax, [c], t, key)
-    axes[2].plot(ts['time_s'], ts['source_umol_s'], color=GREEN, label='Expanded leaflet total')
+    axes[2].plot(ts['time_s'], ts['source_umol_s'], color=GREEN, label='Whole-tree net exchange')
     axes[2].set(ylabel='Net exchange (µmol/s)', title='Uptake stays active during opening and while open')
     axes[3].plot(ts['time_s'], ts['gap_m']/cfg.gap, color='#385FC3', label='Opening fraction')
     axes[3].step(ts['time_s'], ts['fans_on'], where='post', color=GREEN, label='Fans on = 1')

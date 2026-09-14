@@ -188,7 +188,7 @@ def compile_study(p):
         tree_source_umol_s=p.exchange.net_co2_umol_s)
     heights = f.heights_m if f.heights_m is not None else [(c.height_m/(2*f.count))*(2*i+1) for i in range(f.count)]
     angles = f.azimuths_deg if f.azimuths_deg is not None else [(f.first_azimuth_deg+360*i/f.count)%360 for i in range(f.count)]
-    # Stable special-angle vectors preserve the accepted 120-degree baseline.
+    # Exact special-angle vectors avoid roundoff in the symmetric fan arrangement.
     special = {0.: [1.,0.,0.], 120.: [-.5,math.sqrt(3)/2,0.], 240.: [-.5,-math.sqrt(3)/2,0.]}
     axes = [special.get(v, [math.cos(math.radians(v)),math.sin(math.radians(v)),0.]) for v in angles]
     fans = FanArray(model=f.model, heights_above_floor_m=heights, axes=axes if f.count else None,

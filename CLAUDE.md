@@ -1,31 +1,22 @@
-# Operating-chamber CFD contract
+# Repository conventions
 
-The owner's 12 September 2026 instruction selects
-`runs/03_reference_chamber/c2_central_fans` as the current operating-design
-reference and archives every other existing result study. On 14 September the
-owner adopted the documented nominal 6 × 4 × 4 m size. The revised bundle is
-current at that path; its 3.7 m predecessor is preserved in
-archive/2026-09-14-before-size-revision/c2_central_fans.
-Use the physical folder layout; do not create a results HTML dashboard.
+Start with README.md and docs/operating/INPUTS.md, METHOD.md and REPRODUCING.md.
+The entry point is scripts/operating_chamber.py; configs/operating/current.yaml
+contains the reference inputs. Use Python 3.12, requirements-operating.lock
+and FFmpeg/ffprobe.
 
-Read README.md, docs/operating/INPUTS.md, METHOD.md and REPRODUCING.md.
-The active input is configs/operating/current.yaml and the launcher is
-scripts/operating_chamber.py. Execute in a new output folder. The dedicated
-operating Git branch is a portable source snapshot; existing local legacy code,
-branches, private data-selection workflows and generated outputs are preserved.
-Do not sweep them into a push. No force push, raw-data upload or broad git add.
+Keep the numerical operators separate from configuration and presentation.
+Changes to operators require the component tests and numerical comparison.
+Changes to figures require media decoding and visual inspection. Run the
+portable suite with `python -m pytest tests/operating tests/recreated`.
 
-The runtime is the existing NumPy/SciPy conservative moving-mesh solver, not
-PhiFlow or WaterLily. Chamber dimensions are nominal 4 × 6 × 4 m (solver x/y/z), 96 m³, at
-default settings. Design width/depth are 6/4 m. The floor remains an assumed
-0.6 m; installed inside dimensions are not field verified.
-The prescribed February 2025 net source is not a current-year observation or
-gross leaf photosynthesis. Fans add momentum only; uptake continues all phases
-on representative leaflets. No pole blockage or dynamic leaf physiology is solved.
-Retain failed sensitivity screens and the diagnostic/not-validated status.
+Generated runs belong in a fresh runs/ directory. The committed example under
+examples/central_fans contains selected result files, inputs and provenance;
+update its checksum manifest when replacing those files. Preserve existing
+results and commit only the intended paths.
 
-Use Python 3.12 and requirements-operating.lock plus FFmpeg/ffprobe. The portable
-checks are tests/operating and the included numerical tests in tests/recreated.
-The original mixed workspace contains additional legacy tests requiring their
-own inputs/dependencies. Changes to operators require their component tests and
-numerical replay; presentation changes require media decode and visual review.
+Keep units, coordinate conventions, source signs and numerical limitations
+explicit. Nominal dimensions, schematic leaflets and assumed fan performance
+must remain distinguishable from measurements. A passing test is not field
+validation. Do not include private observations, field documents or credentials
+in example outputs. Keep repository visibility and existing Git history intact.

@@ -1,59 +1,82 @@
-# Operating-chamber verification
+# Numerical checks
 
-## Current size revision: 14 September 2026
+The [central-fan example](../../examples/central_fans/) completes two operating
+cycles and passes conservation and file-integrity checks. Its first-closure
+grid-sensitivity check exceeds the specified 5% criterion. These checks assess
+the implementation and numerical behaviour; they do not validate the model
+against measurements.
 
-The owner adopted documented nominal **6 × 4 × 4 m** geometry. The solver's
-x/y/z dimensions are **4 × 6 × 4 m**, with 96 m³ rectangular airspace. Three
-fan levels follow the equal-band rule: 0.667, 2.000 and 3.333 m above the floor.
-The fixed support, wind, palm, prescribed uptake, cycle and numerical operators
-retain their previous settings. Automatic exterior height increases to 9.3 m.
+## Reference calculation
 
-| Check | Current result |
+The chamber has a nominal rectangular air volume of **96 m³**: 4 × 6 × 4 m
+in solver coordinates. The main run covers 1800 s with 0.5 m target cells and
+0.5 s maximum time steps. Additional cases cover the first sealed 300 s using
+a finer grid or a smaller time step.
+
+| Check | Main-run result |
 |---|---|
-| Main run | Complete: 1800 s, 0.5 m target cells, 0.5 s maximum steps |
-| Numerical screens | Complete: first 300 s, 1/3 m grid and 0.25 s step |
-| Saved fields and leaf-source maps | 243 of each across the three cases |
-| Simulated closed-region volume | 96 m³ in all cases, independently checked from saved cell intersections |
-| First-closure analytical mean | 396.605389 ppm; maximum main-run error 1.46e-07 ppm |
-| Main CO₂ inventory residual | Maximum fraction 2.41e-08 |
-| Main incompressibility residual | Maximum 7.09e-10 s⁻¹ |
-| Moving-volume residual | Main maximum 1.22e-12 m³ |
-| Leaflet allocation and saved-field statistics | PASS; uptake is continuous and excluded from trunk/bare frond axes |
-| Grid sensitivity | **FAIL**: 5.834% spatial-standard-deviation change against 5%; mean speed changes 4.245% |
-| Time-step sensitivity | PASS: 1.124% spatial-standard-deviation change; mean speed changes 0.541% |
-| Component tests | 137 passed, 1 skipped, 400.13 s; skipped historical-fixture parity test is separate from this complete run |
-| Media | All four MP4/GIF pairs decode; white backgrounds and unclipped viridis scales pass |
-| Visual review | Cycle closure/opening, fan section, operation plot, source location and updated fan-height schematic inspected |
-| Palm/source preservation | All seven geometry arrays exactly equal the previous result |
-| Previous result preservation | All 592 files retain their pre-move SHA-256 hashes |
+| Enclosed volume, independently calculated from saved cell intersections | 96 m³ |
+| Mean CO₂ after the first 300 s closure | 396.605389 ppm |
+| Maximum error against the first-closure analytical mean | 1.46 × 10⁻⁷ ppm |
+| Maximum normalized CO₂ inventory residual | 2.41 × 10⁻⁸ |
+| Maximum incompressibility residual | 7.09 × 10⁻¹⁰ s⁻¹ |
+| Maximum moving-volume residual | 1.22 × 10⁻¹² m³ |
+| Maximum difference between saved-field and recorded means | 1.14 × 10⁻¹³ ppm |
+| Maximum leaflet-source allocation error | 7.11 × 10⁻¹⁵ µmol/s |
 
-Detailed current records are `verification/checks.json` and
-`verification/bundle_manifest.json` inside the result. The local revision and
-recovery record is `simulation/maintenance/2026-09-14-operating-size-revision/`.
+The analytical mean check follows directly from the prescribed net exchange,
+temperature, pressure and sealed volume. It is independent of how fans
+redistribute CO₂ within that volume. The finer-grid and smaller-time-step
+cases also pass the conservation and source-allocation checks.
 
-## Historical 3.7 m result
+## Sensitivity to grid and time step
 
-The 13 September portable-workflow verification concerned the previous
-**88.8 m³** geometry. Its numerical replay was exactly equal across 243 saved
-fields; the grid screen failed at 6.867% spatial variation, and the time-step
-screen passed at 0.559%. The earlier source-only checkout passed 79 tests.
-These historical values do not describe the revised 96 m³ run. The previous
-bundle is now in `archive/2026-09-14-before-size-revision/c2_central_fans`;
-its inputs remain recoverable from source commit
-`39ad6840cfe712cf0e986116701f9f81ba547615` and the earlier maintenance record.
+These comparisons use the relative RMS difference from the main run over
+the **first 300 s only**. Each monitored quantity must stay below 5% to pass.
 
-## Scientific, privacy and recovery limits
+| Case | Target cell size | Maximum step | Spatial CO₂ standard deviation | Mean air speed | Result |
+|---|---:|---:|---:|---:|---|
+| Finer grid | 1/3 m | 0.5 s | 5.834% | 4.245% | **FAIL** |
+| Smaller time step | 0.5 m | 0.25 s | 1.124% | 0.541% | PASS |
 
-These are implementation and numerical checks, not empirical validation.
-Installed clear dimensions, fan performance and pole position remain assumed;
-pole blockage is unresolved, leaflets are schematic and physiology is prescribed.
-The −44.40047791098563 µmol/s source retains its February 2025 Q95 provenance;
-it is not a new 2026 observation. No observation reprocessing or rate rescaling
-was performed when changing the chamber height. The grid screen still fails,
-and opening-grid convergence remains unestablished.
+The grid result means spatial variation is still sensitive to resolution at
+the chosen threshold. Passing the time-step comparison alone does not establish
+convergence. Neither comparison tests the opening phase. A quantitative study
+of mixing time or fan placement needs further resolution studies and comparison
+with measurements.
 
-Only the existing portable source allowlist is eligible for the authorized
-private Git update. Raw observations, holdouts, CAD, private data-selection
-workflows, outputs, archives and environments remain local. Existing unrelated
-working-branch changes remain preserved. A source commit is not a remote backup
-of the result videos or archived evidence.
+## Reproduction and media
+
+The examples were run on 14 September 2026 using Python 3.12.13, the pinned
+dependencies and FFmpeg 8.1. Both documented commands completed: the four-second
+installation example and the full reference calculation.
+
+The standalone repository's **79 tests pass**. A repeat of the reference
+calculation exactly reproduced the three case histories, all **243 saved
+CO₂/velocity fields**, their **243 leaflet-source maps**, and the seven palm
+geometry arrays from source revision `cf7728660855923457626e6deaaa8f43824bf151`.
+This equality was checked in the same pinned environment; other platforms
+may introduce floating-point or encoding differences.
+
+The published example contains **4 MP4 files, 4 GIF files and 24 PNG figures**.
+All decode successfully. The four views were visually inspected for readable
+labels, white backgrounds, fan positions and the opening/closing sequence.
+
+Exact numerical results are in
+[checks.json](../../examples/central_fans/checks.json). The
+[provenance record](../../examples/central_fans/provenance.json) records the
+environment, source hashes and replay comparison. Verify the published file
+list, checksums and media from the repository root:
+
+```bash
+python scripts/check_example.py --decode
+```
+
+## Physical assumptions
+
+Installed inside dimensions, fan performance and support position still need
+measurement. The model uses schematic leaflets, omits support and fan-housing
+blockage, and prescribes whole-tree net exchange independently of the local
+environment. The historical February 2025 rate is a diagnostic input, not a
+current-year measurement. See [the model formulation](METHOD.md) for the
+equations and remaining physical limits.

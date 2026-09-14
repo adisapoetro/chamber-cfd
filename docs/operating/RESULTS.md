@@ -1,55 +1,63 @@
-# One active operating-design result
+# Reading the results
 
-Current result, revised 14 September 2026: **nominal 6 × 4 × 4 m**, 96 m³.
-In the original PalmTwin workspace, open:
+The [central-fan example](../../examples/central_fans/) contains ready-to-view
+results. A full run produces this structure in the requested output folder:
 
 ```text
-fluid-dynamic/
-  runs/
-    README.md
-    03_reference_chamber/
-      README.md
-      c2_central_fans/             CURRENT: nominal 4 m air height
-        videos/                   Four MP4/GIF pairs
-        figures/                  White-background figures
-        data/                     Saved fields and histories
-        configs/, geometry/, verification/
-  archive/
-    2026-09-14-before-size-revision/
-      README.md
-      c2_central_fans/             Previous 3.7 m height; original bytes
-    2026-09-12-other-studies/
-      README.md
-      runs/
-        01_chamber_designs/
-        02_wind_directions/
-        03_reference_chamber/     Earlier frond/fan/palm/reference variants
-    …                             Older archives unchanged
+README.md                   Links to the run's results and checks
+METHOD.md, INPUTS.md,
+REPRODUCING.md               Documentation captured with the run
+configs/                    Resolved inputs, source snapshot and environment
+geometry/                   Schematic palm and representative leaflet surfaces
+videos/                     Four views, each as MP4 and GIF
+figures/                    Still frames, histories, source and fan diagrams
+data/cfd_runs/              Main, finer-grid and smaller-time-step cases
+verification/               Integrity, conservation, sensitivity and media checks
+logs/                       Calculation log for each case
 ```
 
-The current bundle uses `videos/cycle.mp4`, `fan_sections.mp4`,
-`operating_timeseries.mp4` and `leaf_source_location.mp4`, each with a GIF.
-These are the four views produced by the portable workflow. The archived
-3.7 m version keeps `c2_202502_cycle` and `scenarios_timeseries` filenames.
+## Videos and figures
 
-The revised geometry follows the owner's adoption of recent documentary nominal
-dimensions. It is not an inside-to-inside survey or field validation. Read
-INPUTS.md for the dimension/axis convention and VERIFICATION.md for the checks.
+| File stem | What it shows |
+|---|---|
+| `cycle` | 3D CO₂ slices, airflow, a horizontal section and concentration histories |
+| `fan_sections` | Airflow and CO₂ in a vertical section through the fan support |
+| `operating_timeseries` | Mean concentration, spatial variation, net exchange and opening/fan states |
+| `leaf_source_location` | The representative leaf surfaces and where exchange enters the calculation |
 
-Original manifests and frozen READMEs retain their source-era paths and claims.
-The current canonical folder now denotes the revised run; the old bundle's
-historical path is recorded separately in `run_locations.json` under
-`operating_size_revision`. Do not redirect the active path to the archive.
+The timestamp on each frame is physical simulation time. Playback slows around
+wall movement, so video duration is not simulated duration. Figure names such
+as `cycle_0300s.png` identify the corresponding physical time.
 
-Local recovery records are in
-`simulation/maintenance/2026-09-14-operating-size-revision/` and, for the prior
-workflow publication and broad housekeeping,
-`simulation/maintenance/2026-09-12-operating-workflow/`. They contain hashes,
-before-state files, checks and move records. No result was deleted. Restore an
-archived bundle only to an absent destination after preserving the current one.
+The CO₂ colour scale is fixed within a video and expands if needed to include
+all calculated concentrations. Purple indicates lower concentrations and
+yellow indicates higher concentrations. The source-location view has a
+separate scale for depth-integrated removal; it is not a CO₂ concentration map.
 
-Git publication contains rerunnable code and inputs, not videos, raw observations
-or local archives. Use a fresh folder for each rerun. A newly executed run does
-not automatically replace the current reference; the 14 September replacement
-was explicitly requested by the owner. Keep temporary verification runs in the
-maintenance directory and retain the physical folder layout without an HTML hub.
+## Histories and saved fields
+
+Each case's `timeseries.csv` records time, opening gap, chamber-region mean and
+standard deviation, airflow statistics, source rate, fan state and numerical
+balance diagnostics. The reported region remains the original closed-chamber
+volume even while the two shells move apart.
+
+The mean is volume weighted. Spatial standard deviation measures differences
+between air cells; it is not a confidence interval or sensor uncertainty.
+The net-exchange rate is in µmol/s for the whole plant: negative means removal
+from air. Source allocation follows representative leaflet area within each cell.
+
+A full run also stores compressed NumPy snapshots with CO₂, velocity, cell
+coordinates and volumes, alongside leaflet-area maps. `summary.json` lists
+saved times and paths. The small committed example provides histories and
+plots; rerun its input to generate all spatial arrays.
+
+## Read the checks before interpreting the flow
+
+`verification/checks.json` separates integrity/conservation checks from
+numerical sensitivity. A run can complete successfully while a sensitivity
+check fails. In the reference case, the first-closure grid check exceeds the
+5% criterion; see [VERIFICATION.md](VERIFICATION.md).
+
+`verification/bundle_manifest.json` contains the full run's checksums. The
+committed example has its own `manifest.json`, covering only the files included
+in the repository. Check those with `python scripts/check_example.py`.

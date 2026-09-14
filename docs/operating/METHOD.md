@@ -1,21 +1,15 @@
-# How the operating-chamber simulation works
+# Model formulation
 
-This is the owner-selected **4 × 6 × 4 m nominal operating chamber**, with two sliding
-halves, an elevated floor and a palm inside. The current configuration has three
-fans on a fixed pole approximately 0.30 m beside the trunk. They sit at
-0.667, 2.000 and 3.333 m above the floor, blowing toward 0°, 120° and 240°.
-The support location and absolute direction are prescribed approximations.
-The design documents call the plan dimensions 6 m width × 4 m depth; the
-solver's x/y names are reversed because x follows sliding travel. The resulting
-rectangular air volume is 96 m³. The owner adopted the documented nominal
-4 m clear height on 14 September 2026; installed inside dimensions and net
-air volume remain unverified. The floor datum remains the assumed 0.6 m.
+The model represents two sliding chamber halves around a schematic oil palm.
+The reference enclosure is nominally **6 × 4 × 4 m**, with a floor 0.6 m above
+external ground. Solver coordinates are x × y × z = 4 × 6 × 4 m; x follows
+sliding travel. Three fans sit on a fixed support 0.30 m beside the trunk,
+at 0.667, 2.000 and 3.333 m above the floor. They blow toward 0°, 120° and 240°.
 
-The Python runtime is `fluid_dynamic.operating` →
-`fluid_dynamic.recreated.fan_solver`, using NumPy/SciPy finite-volume operators
-and `fluid_dynamic.scenarios.geometry`. The repository also contains historical
-PhiFlow code; **the selected central-fan bundle and this reproduction do not use
-PhiFlow or WaterLily**. No plant model or notebook is executed to obtain inputs.
+The implementation uses NumPy/SciPy finite-volume operators. Configuration is
+compiled by `fluid_dynamic.operating`; airflow and transport are calculated by
+`fluid_dynamic.recreated.fan_solver` on the fitted geometry provided by
+`fluid_dynamic.scenarios.geometry`.
 
 ## Air carries CO₂; diffusion spreads gradients
 
@@ -76,7 +70,7 @@ solid obstacles. Fans run only while fully sealed.
 
 ## Exchange is on leaflets along the fronds
 
-The main illustration retains the accepted simple trunk and five fronds.
+The palm illustration has a simple trunk and five fronds.
 The source uses 120 representative leaflet patches, 240 triangles, along
 25–90% of those fronds. Triangle/cell intersection areas allocate the total:
 
@@ -88,13 +82,18 @@ photosynthesis rate. The patch count, fine geometry and approximately 0.733 m²
 one-sided proxy area are schematic. They do not establish actual organ counts,
 measured leaf area, stomatal behaviour or per-leaf photosynthesis.
 
-`exchange.net_co2_umol_s` is a prescribed **whole-tree net** rate. Negative
-removes CO₂; positive releases it. The default −44.40047791098563 µmol/s retains
-the owner-selected February 2025 daytime Q95 uptake-strength diagnostic. It is
-not a 2026 observation, a typical daily mean or gross leaf photosynthesis. The
-local observation provenance remains with the preserved study and is not needed
-or exported by this workflow. Changing the rate does not rerun a statistical
-selection. Update its label and provenance when supplying another value.
+`exchange.net_co2_umol_s` specifies the **whole-tree net** rate. Negative values
+remove CO₂; positive values release it. The reference value,
+−44.40047791098563 µmol/s, represents a February 2025 daytime Q95
+uptake-strength case. Daytime was defined by measured global radiation
+Rg ≥ 10 W/m², with no upper radiation limit. Q95 refers to uptake strength,
+equivalent to Q05 of signed net exchange.
+
+The example supplies that value as a constant input. It is not a daily mean,
+a current-year observation or gross leaf photosynthesis. It does not adjust
+to local CO₂, light or temperature. The original observations are not needed
+to run the example. When supplying a different rate, also update its label
+and record its measurement basis or model assumption.
 
 Exchange continues while sealed, moving and fully open. No extra respiration
 is added to a net rate. The solver uses reference air molar density P/(RT) for
@@ -118,14 +117,22 @@ The scale expands to include calculated extrema; it does not clip inconvenient
 values. Frames come from saved fields at printed physical times; repeated frames
 slow the display during wall movement without interpolating CFD fields.
 
-Each completed run records inventory, moving-volume, source-area, saved-field
-and sealed-mean checks in `verification/checks.json`. Read the same file for
-that run's first-closure grid and time-step sensitivity results. The previous
-3.7 m run failed the grid screen (about 6.87% change in spatial standard
-deviation against 5%) and passed the time-step screen (about 0.56%); those
-numbers do not describe the revised 4 m run. Opening-grid convergence remains
-unestablished. These engineering
-checks do not validate installed fan performance, leaf physiology or actual
-chamber mixing time. The original uptake-to-geometry transfer and plant identity
-remain conditional. Selecting this as the current design does not remove those
-limits. No calibration, qualified forecast or field validation is claimed.
+## Verification and scope
+
+Each run checks inventory conservation, moving-cell volumes, source allocation,
+saved-field statistics and the first sealed interval's analytical mean.
+Results are written to `verification/checks.json`.
+
+The reference example passes these checks and its time-step sensitivity test.
+Its first-closure grid test exceeds the specified 5% criterion: the relative
+RMS change in spatial standard deviation is 5.83%. The
+[verification report](VERIFICATION.md) gives the metrics and test scope.
+
+The chamber's installed clear dimensions and fan performance remain unverified.
+The model omits pole and fan-housing blockage, temperature and humidity
+feedback, buoyancy, leakage through imperfect seals, and dynamic plant
+physiology. Leaflet geometry and the spatial allocation of net uptake are
+schematic. The transfer of a historical uptake rate to this nominal chamber
+geometry is a diagnostic assumption. Opening-grid convergence has not been
+established, so the example cannot establish an optimal fan arrangement or a
+validated chamber mixing time.

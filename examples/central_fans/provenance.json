@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "description": "Reference calculation of CO2 transport in a chamber with three central fans and constant leaflet net exchange.",
+  "generated_date": "2026-09-14",
+  "scientific_status": "DIAGNOSTIC_NOT_VALIDATED",
+  "input": "input.yaml",
+  "input_sha256": "a4aa0930ed38d132b5c5349a144bfc94f97bb253be4be8624e2696e29b943282",
+  "command_from_repository_root": "python scripts/operating_chamber.py all --input examples/central_fans/input.yaml --output runs/central_fans --workers 2",
+  "environment": {
+    "python": "3.12.13 (main, Mar  3 2026, 12:39:30) [Clang 17.0.0 (clang-1700.6.3.2)]",
+    "platform": "macOS-26.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.4.4",
+      "scipy": "1.17.1",
+      "matplotlib": "3.10.9",
+      "pydantic": "2.13.4",
+      "PyYAML": "6.0.3",
+      "Pillow": "12.2.0"
+    },
+    "blas_threads": 1,
+    "ffmpeg": "ffmpeg version 8.1 Copyright (c) 2000-2026 the FFmpeg developers"
+  },
+  "source_sha256": {
+    "configs/operating/current.yaml": "a4aa0930ed38d132b5c5349a144bfc94f97bb253be4be8624e2696e29b943282",
+    "docs/operating/INPUTS.md": "7a1162448afe0ae13a33fc31be0e57144eb4317d0f3380c6e8c5c6c0e4a42653",
+    "docs/operating/METHOD.md": "672fac4f6c159b407b104d4a096d842130b34f23896e211cb82dd149a0c2e8b3",
+    "docs/operating/REPRODUCING.md": "774f3e995e3ecf25fb72a74e71a3a3d0edff25360d072ef4e27f3c5e9f898d43",
+    "meshes/palm_libz.obj": "ac36dae7ebbd9031c103de44826354e6b23dae706a5ef5575172e5422b154ed8",
+    "requirements-operating.lock": "5bb6ba34bb7d8ab81e118720803a975a3a8530a4ef0894780fb3cf863efed1e3",
+    "scripts/operating_chamber.py": "0aab90b818103484c64e73296962129a0b79c62acdfcb08e149ed6c491734dd3",
+    "src/fluid_dynamic/__init__.py": "91447944015cec709e8aa7655f7e9d64e1e4508e7023a57fe3746911c0fc6fed",
+    "src/fluid_dynamic/operating/__init__.py": "d77dcb3b05172146e4c9a39e71de2572bbd305ad037010381c8e21b31630cdd1",
+    "src/fluid_dynamic/operating/audit.py": "f44bc3b67f69c9ae6c8acc983f1450fe581abdf370c142870201b01b53ed873f",
+    "src/fluid_dynamic/operating/config.py": "aa073be9aadf565dd63f924d86a35bda70ae9faaaf39b104f25b49a888130c22",
+    "src/fluid_dynamic/operating/render.py": "6c81c6e6092121dd50d256b933dc1ef3b38c4cb6e2abf11fb8294b26a81ef4a7",
+    "src/fluid_dynamic/operating/views.py": "2f4a4c398a2fca0f3b7d00a49f13bdd719a89333e6f7544b1296df97db3fc5f6",
+    "src/fluid_dynamic/operating/workflow.py": "1b2709ae6b3af09b1f9f0463341673d02878437e859f9bcd7ef78498c5390238",
+    "src/fluid_dynamic/recreated/__init__.py": "0f434d43a8bf9454c4b632bbd3bd6127a7525af323818ed6e6ec3dedcadd7ebc",
+    "src/fluid_dynamic/recreated/fan_forcing.py": "a31fb8cc94678f49fb0024349c7b3cc571dfaf57e8a08099b49239ff2e7b9193",
+    "src/fluid_dynamic/recreated/fan_solver.py": "16e54ddbfbe11ce2974a457d7c037f7723cea8d65c8696677895c8ab5755f413",
+    "src/fluid_dynamic/recreated/frond_geometry.py": "0da1778b434e3d3d771da0f51e7236a28190ffd423bb64ddb32b081ac9e85091",
+    "src/fluid_dynamic/recreated/leaf_geometry.py": "039c4eec01073f72084ff58e078f4293817d4fcba7461bc054123556baf380dd",
+    "src/fluid_dynamic/recreated/leaf_source.py": "657c6e9fa7f73290f59760bdeb6679783d4c0d2854d70f554d2d915b0b923a40",
+    "src/fluid_dynamic/recreated/mesh.py": "ad4aa388cdc8aaba31c124edf05fac5dc444b74ff990fda45353dd0d2fdeb5f3",
+    "src/fluid_dynamic/recreated/operators.py": "d9ce22bba99d27dc11b930a5124a953ff85ef196b1b0effb73799d0e2b004794",
+    "src/fluid_dynamic/recreated/render.py": "307251c44501742f306cf586533e23ed33827fbf9bb1a92a04124d682e2b8ed5",
+    "src/fluid_dynamic/recreated/solver.py": "7fd4f404a77425297a5a9e26bdc5e1b477fb6271cdaf7666f679691ff50ba273",
+    "src/fluid_dynamic/scenarios/__init__.py": "0eb9f4b9883aba5992bc8cccfcf969b601fcb5caee39640df30c7b437ede56ab",
+    "src/fluid_dynamic/scenarios/geometry.py": "f7c931893267bfbeff137dc385eaa980fb2a6ae0b0c58538b10172f17f495542",
+    "src/fluid_dynamic/scenarios/presentation_render.py": "947dd9a474a8d62f3c5dd34d6621e50e53b929fedf58b446162513e8ff78dff2"
+  },
+  "input_basis": {
+    "chamber": "Nominal technical-document dimensions, pending an installed inside-dimension survey.",
+    "design_dimensions_m": [
+      6,
+      4,
+      4
+    ],
+    "solver_xyz_dimensions_m": [
+      4,
+      6,
+      4
+    ],
+    "rectangular_air_volume_m3": 96,
+    "fan_performance": "Nominal free-air rating; installed flow and thrust are unverified.",
+    "support_position": "Approximate fixed support 0.30 m beside the trunk; blockage unresolved.",
+    "plant_geometry": "Schematic envelope and representative leaflet surfaces, not a resolved measured canopy.",
+    "net_exchange": {
+      "value_umol_s": -44.40047791098563,
+      "chamber_id": "C2",
+      "period": "2025-02",
+      "qualifying_daytime_cycles": 188,
+      "statistic": "Q95 uptake strength, equivalent to Q05 signed net exchange",
+      "daytime_rg_min_w_m2": 10,
+      "daytime_rg_max_w_m2": null,
+      "forcing": "Constant in all operating phases; no feedback from light, temperature or CO2.",
+      "measurement_selection_reproduction": "The fixed scalar is supplied as input. Original observations and their processing workflow are not included."
+    }
+  },
+  "published_contents": {
+    "media": "All four MP4/GIF pairs and all 24 PNG figures from the reference run.",
+    "data": "Simulated histories for main, grid and dt cases, numerical checks and resolved fan positions.",
+    "regenerated_by_command": "Full spatial arrays, leaflet-source maps, geometry, frozen source tree, full-run manifest and logs.",
+    "checks_json_scope": "The full reference run, including spatial arrays not stored in this example folder.",
+    "csv_line_endings": "LF in the committed files; numerical values and columns are unchanged from the generated CSVs."
+  },
+  "numerical_replay": {
+    "reference_source_commit": "cf7728660855923457626e6deaaa8f43824bf151",
+    "cases": {
+      "main": {
+        "timeseries_bytes_identical": true,
+        "npz_files": 362,
+        "arrays_equal": 3258,
+        "maximum_absolute_difference": 0.0
+      },
+      "grid": {
+        "timeseries_bytes_identical": true,
+        "npz_files": 62,
+        "arrays_equal": 558,
+        "maximum_absolute_difference": 0.0
+      },
+      "dt": {
+        "timeseries_bytes_identical": true,
+        "npz_files": 62,
+        "arrays_equal": 558,
+        "maximum_absolute_difference": 0.0
+      }
+    },
+    "palm_geometry_arrays_equal": 7,
+    "status": "PASS"
+  },
+  "verification": {
+    "portable_tests_passed": 79,
+    "quick_start_command": "PASS",
+    "reference_command": "PASS",
+    "conservation_and_integrity": "PASS",
+    "first_closure_grid_sensitivity": "FAIL",
+    "first_closure_timestep_sensitivity": "PASS",
+    "opening_convergence": "NOT_ESTABLISHED",
+    "checks_file": "checks.json"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "implementation_status": "PASS",
+  "scientific_status": "DIAGNOSTIC_NOT_VALIDATED",
+  "cases": {
+    "main": {
+      "status": "PASS",
+      "volume_m3": 96.0,
+      "frames": 181,
+      "minimum_ppm": 390.75382114493584,
+      "maximum_ppm": 400.0000000040904,
+      "sealed_error_ppm": 1.4620428601119784e-07,
+      "field_history_error_ppm": 1.1368683772161603e-13,
+      "source_error_umol_s": 7.105427357601002e-15,
+      "max_budget_fraction": 2.4093540435886738e-08,
+      "max_divergence_s_inv": 7.093268102516721e-10,
+      "max_gcl_m3": 1.2205770248685521e-12
+    },
+    "grid": {
+      "status": "PASS",
+      "volume_m3": 96.0,
+      "frames": 31,
+      "minimum_ppm": 385.4676495155026,
+      "maximum_ppm": 400.0000000000144,
+      "sealed_error_ppm": 1.0161181762669003e-07,
+      "field_history_error_ppm": 1.7053025658242404e-13,
+      "source_error_umol_s": 0.0,
+      "max_budget_fraction": 2.992937633913097e-08,
+      "max_divergence_s_inv": 2.1170565300820964e-13,
+      "max_gcl_m3": 3.920475055707584e-15
+    },
+    "dt": {
+      "status": "PASS",
+      "volume_m3": 96.0,
+      "frames": 31,
+      "minimum_ppm": 390.9541243638828,
+      "maximum_ppm": 400.0000000000027,
+      "sealed_error_ppm": 1.1113343134638853e-07,
+      "field_history_error_ppm": 1.1368683772161603e-13,
+      "source_error_umol_s": 7.105427357601002e-15,
+      "max_budget_fraction": 3.275541499073008e-08,
+      "max_divergence_s_inv": 5.523359547510154e-14,
+      "max_gcl_m3": 1.7139067942650854e-15
+    }
+  },
+  "sensitivity": {
+    "grid": {
+      "status": "FAIL",
+      "duration_s": 300.0,
+      "relative_rms_change": {
+        "roi_std_ppm": 0.058340983920889974,
+        "roi_mean_speed_m_s": 0.042445566930661094
+      }
+    },
+    "dt": {
+      "status": "PASS",
+      "duration_s": 300.0,
+      "relative_rms_change": {
+        "roi_std_ppm": 0.011243796774032935,
+        "roi_mean_speed_m_s": 0.0054074738517959926
+      }
+    }
+  },
+  "screen_scope": "Configured screen interval only; first closure by default. Opening convergence is not established.",
+  "saved_fields": 243,
+  "leaf_source_maps": 243,
+  "media_status": "PASS",
+  "media_files": 8
+}

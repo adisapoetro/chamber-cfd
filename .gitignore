@@ -12,3 +12,7 @@ runs/
 *.gif
 *.blend
 *.blend1
+
+# Curated reference media are versioned; generated runs remain ignored.
+!/examples/central_fans/videos/*.mp4
+!/examples/central_fans/videos/*.gif

@@ -1,128 +1,123 @@
-# Reproduce or change the operating-chamber study
+# Running a simulation
 
-Run these commands from the `fluid-dynamic` repository root. A fresh checkout
-needs only repository files: no PalmTwin database, prior output, notebook,
-absolute user path, Julia model, Blender file or private source table.
+All commands below run from the repository root. Inputs, the schematic plant
+mesh and Python dependencies are included; the example does not require an
+external plant database.
 
-## Install the tested environment
+## Install
 
-Use Python **3.12** (reference 3.12.13) and FFmpeg/ffprobe on PATH (reference 8.1,
-with libx264 and GIF support). The runtime dependency lock includes tests.
+Use Python **3.12** and FFmpeg with `ffprobe`, libx264 and GIF support.
+The reference environment used Python 3.12.13 and FFmpeg 8.1.
 
 ```bash
 python3.12 -m venv .venv-operating
-.venv-operating/bin/python -m pip install -r requirements-operating.lock
-.venv-operating/bin/python scripts/operating_chamber.py validate
-.venv-operating/bin/python -m pytest tests/operating tests/recreated/test_conservation.py
+source .venv-operating/bin/activate
+python -m pip install -r requirements-operating.lock
 ffmpeg -version
+ffprobe -version
+python scripts/operating_chamber.py validate
 ```
 
-If using uv: `uv venv --python 3.12 .venv-operating`, then
-`uv pip install --python .venv-operating/bin/python -r requirements-operating.lock`.
-The legacy `uv.lock`/project dependencies support earlier PhiFlow workflows;
-`requirements-operating.lock` is the explicit environment for this workflow.
-The launcher sets BLAS/OMP/MKL to one thread. Each output records library and
-platform versions, configuration hashes and every executed source file.
+On Windows, activate the environment with `.venv-operating\Scripts\activate`
+and use the same `python` commands. The dependency lock includes the tests.
+The launcher limits numerical libraries to one thread per worker and records
+package versions with each run.
 
-## Run the complete bundle
+## Start with a short run
 
 ```bash
-.venv-operating/bin/python scripts/operating_chamber.py all \
-  --input configs/operating/current.yaml \
-  --output runs/03_reference_chamber/reproduction --workers 2
+python scripts/operating_chamber.py all \
+  --input examples/quick_start.yaml --output runs/quick_start
 ```
 
-A fresh directory is mandatory. The active result stays at
-`runs/03_reference_chamber/c2_central_fans`; its previous 3.7 m version is
-preserved under `archive/2026-09-14-before-size-revision/c2_central_fans`.
-The default geometry is now nominal 4 × 6 × 4 m (96 m³), adopted by the owner
-on 14 September 2026. It runs 1800 s with
-0.5 m target cells and 0.5 s maximum steps, plus a 300 s 1/3 m grid screen and
-a 300 s 0.25 s time-step screen. CFD takes a few minutes on the reference machine;
-rendering the four videos takes longer. Do not confuse movie duration with
-simulated physical time.
+This runs one four-second cycle on a coarse grid, including opening and
+closing, and generates the four video views. It checks that the calculation
+and rendering work together; it is too short to study mixing performance.
 
-The new output contains:
-
-```text
-README.md, METHOD.md, INPUTS.md, REPRODUCING.md
-configs/             resolved user inputs, solver cases, frozen source, environment
-geometry/            original illustration and representative leaflet source
-videos/              cycle, fan_sections, operating_timeseries, leaf_source_location
-                     each as MP4 and GIF
-figures/             stills, CO2 history, schedule, source and fan schematics
-data/cfd_runs/       main, grid and dt: histories, saved fields, source-area maps
-verification/        numerical/media checks, hashes and full bundle manifest
-logs/                one simulation log per case
-```
-
-The four views match the chosen bundle's subjects. The revised active bundle
-and new runs use generic filenames; the archived 3.7 m bundle retains its
-historical `c2_202502_cycle` / `scenarios_timeseries` names and original bytes.
-
-For a short engineering check:
+## Reproduce the reference example
 
 ```bash
-.venv-operating/bin/python scripts/operating_chamber.py all \
-  --set cycle.closed_s=2 --set cycle.open_phase_s=2 \
-  --set cycle.opening_travel_s=0.5 --set cycle.closing_travel_s=0.5 \
-  --set cycle.cycles=1 --set numerics.cell_m=1 \
-  --set numerics.dt_s=0.25 --set numerics.save_every_s=0.5 \
-  --set screens.enabled=false \
-  --output runs/03_reference_chamber/smoke
+python scripts/operating_chamber.py all \
+  --input examples/central_fans/input.yaml \
+  --output runs/central_fans --workers 2
 ```
 
-This short check exercises opening and closure; it is not equivalent to the
-30-minute operating study. For changed dimensions/wind/fans/rate see INPUTS.md.
-`validate` prints resolved solver inputs and checks dimensions/fan placement;
-`prepare` additionally checks the actual leaflet mesh before creating output.
+The main calculation covers 1800 s with 0.5 m target cells and 0.5 s maximum
+time steps. Two additional runs cover the first 300 s: a 1/3 m grid and a
+0.25 s time step. These check sensitivity to numerical resolution. The full
+workflow takes several minutes on the reference machine, including rendering.
 
-## Resume without changing frozen inputs
+Open `runs/central_fans/README.md` for links to the generated results.
+The [committed example](../../examples/central_fans/) contains the media,
+histories and checks for comparison. The full CO₂/velocity fields and frozen
+source tree are generated in the run folder.
+
+Choose a new output directory for each run. Input validation rejects an existing
+folder, invalid units or values, and a plant mesh that does not fit the chamber.
+Use [INPUTS.md](INPUTS.md) to change dimensions, wind, fans or net exchange.
+
+## Run individual stages
 
 ```bash
-python scripts/operating_chamber.py prepare --output runs/03_reference_chamber/my_run
-python scripts/operating_chamber.py run --output runs/03_reference_chamber/my_run
-python scripts/operating_chamber.py render --output runs/03_reference_chamber/my_run
-python scripts/operating_chamber.py audit --output runs/03_reference_chamber/my_run
+python scripts/operating_chamber.py prepare \
+  --input configs/operating/current.yaml --output runs/my_case
+python scripts/operating_chamber.py run --output runs/my_case --workers 2
+python scripts/operating_chamber.py render --output runs/my_case
+python scripts/operating_chamber.py audit --output runs/my_case
 ```
 
-Complete numerical cases are hash-checked and skipped when resuming. An incomplete
-case directory is never overwritten: preserve it and start a new output. Changed
-inputs require `prepare`/`all` in another folder. A code change after preparation
-fails the source check; rerun with its frozen source or prepare a new study.
-For stills only, add `--preview` to render/all. A preview audit explicitly leaves
-media unchecked; it does not claim a complete video delivery. An audit raises an
-error on conservation/integrity failures. A failed sensitivity screen is recorded
-as FAIL separately from a successful engineering execution; inspect checks.json.
+`prepare` freezes inputs, source code, geometry and environment information.
+The remaining commands read those frozen inputs. Do not pass `--input` or
+`--set` to `run`, `render` or `audit`.
 
-For exact source recovery, `configs/source/` is a portable source tree containing
-the launcher, numerical dependencies, mesh and dependency lock. Install its lock,
-then run its launcher on the existing frozen bundle with `run` or `render`.
-For a new rerun, copy `configs/inputs.json` to a YAML/JSON input and use `all`;
-the methods and default input are also included in the frozen source tree.
-JSON is accepted as YAML. Bit-identical video/ZIP bytes are not promised across
-FFmpeg/NumPy versions or platforms. Compare numerical arrays and histories within
-documented tolerance, keeping runtime versions alongside the comparison.
+Completed numerical cases are checksum-verified and skipped when resuming.
+An interrupted, incomplete case requires a new output folder; retain the old
+folder for inspection. If source files have changed since preparation, use
+the snapshot in the run's `configs/source/` directory:
 
-## Adapter boundary for another model
+```bash
+python runs/my_case/configs/source/scripts/operating_chamber.py render \
+  --output runs/my_case
+```
 
-`operating.config.compile_study()` resolves units, geometry, timing, fans and net
-exchange. The current numerical entry is `fan_solver.run_case(cfg, destination,
-mesh_factory=..., fans=...)`. It returns a summary and writes time histories plus
-snapshots (`time_s`, `gap`, cell centres/faces/volumes, CO2 ppm, velocity m/s).
-The leaflet source adapter supplies cell-intersection areas. Renderers consume
-saved fields, and audits independently recompute fixed-region statistics and
-source totals. A different flow model must write that same coordinate/unit/time
-contract or provide an explicit translator; it must not reuse this solver's
-verification status. A dynamic photosynthesis model would need a new named
-exchange adapter and conservation tests; `exchange.model` currently rejects
-unsupported models. No implicit XPalm coupling is claimed.
+The snapshot includes its own dependency lock. Installing that lock gives the
+closest match to the original environment. For another complete run, use
+`configs/inputs.json` from a result as `--input`; JSON is also accepted.
 
-## Git and recovery
+`render --preview` produces stills only. A preview audit leaves video checks
+marked as not checked. A full audit raises an error on integrity or
+conservation failures. Grid and time-step sensitivity failures are recorded
+separately; inspect `verification/checks.json` even when the command succeeds.
 
-Push source, documentation, dependency pins, tests and explicit diagnostic inputs.
-Results, archives, raw observations, CAD files and virtual environments remain
-local. Git reproduces results; it is not an off-machine backup of their videos
-or the private observation provenance. The archive guide records physical moves
-and the local maintenance record verifies their hashes. Never force-push or add
-all workspace changes indiscriminately.
+## Check the installation and published files
+
+```bash
+python -m pytest tests/operating tests/recreated
+python scripts/check_example.py
+python scripts/check_example.py --decode
+```
+
+The example checker verifies the committed file list and SHA-256 hashes.
+`--decode` also reads every image and movie with FFmpeg. It checks file
+integrity, not the physical validity of the calculation.
+
+Compare reproduced time histories and numerical checks before comparing video
+bytes. Encoders and plotting libraries can change file bytes across platforms
+without changing the simulated fields. The reference
+[provenance record](../../examples/central_fans/provenance.json) identifies
+inputs, source hashes, environment and the files supplied with the example.
+
+## Connect another model
+
+`operating.config.compile_study()` resolves dimensions, timing, wind, fans and
+net exchange. The numerical entry point is
+`fan_solver.run_case(cfg, destination, mesh_factory=..., fans=...)`.
+It returns a summary and writes histories plus snapshots containing time,
+wall gap, cell coordinates and volumes, CO₂ in ppm, and velocity in m/s.
+Leaflet-source maps record intersected leaf area and exchange per cell.
+
+Another flow solver needs an adapter for this coordinate, unit and output
+contract. The plotting code can then read its saved fields. Its conservation
+and convergence checks must be established separately. A dynamic photosynthesis
+model likewise needs an exchange adapter; the current `exchange.model` accepts
+only `constant_leaflet_net_exchange` and does not run XPalm or another plant model.

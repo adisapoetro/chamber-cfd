@@ -1,8 +1,4 @@
-"""Preferred fan-video visual style; source surfaces are explained separately.
-
-Movie layout derives from the preserved renderer. No shared renderer or earlier
-bundle is changed. The main scene uses only the exact original display mesh.
-"""
+"""Render saved airflow, CO₂ fields and leaflet exchange on white canvases."""
 from contextlib import nullcontext
 import json
 from pathlib import Path
@@ -121,7 +117,7 @@ def movie(out, root, study, cases, g, name, kind, *, preview=False):
                         marks(axes[0], cases[0], gap, t, '3d')
                         for axis in (axes[0].xaxis, axes[0].yaxis, axes[0].zaxis):
                             axis.set_pane_color((1, 1, 1, 1)); axis.pane.fill = False
-                        axes[0].set_title('Same simple palm · saved CO₂ slices and velocity', fontsize=10, pad=-7)
+                        axes[0].set_title('Schematic palm · CO₂ concentration and airflow', fontsize=10, pad=-7)
                     else:
                         section(axes[0], d, cases[0], norm, t)
                     plan(axes[1], d, cases[0], norm, t)
@@ -186,8 +182,8 @@ def static_figures(out, cases, g):
         ax.view_init(elev=22, azim=-64); ax.set_box_aspect((cfg.width, cfg.depth, cfg.height)); ax.grid(False)
         for axis in (ax.xaxis, ax.yaxis, ax.zaxis):
             axis.set_pane_color((1, 1, 1, 1)); axis.pane.fill=False
-        ax.set_title('Unchanged palm in the main video' if i == 1 else 'Representative leaf surfaces used for uptake', fontsize=11)
-    fig.suptitle('Same simple palm · uptake belongs to leaves along the fronds', fontsize=15)
+        ax.set_title('Schematic palm' if i == 1 else 'Representative leaf surfaces used for uptake', fontsize=11)
+    fig.suptitle('Palm geometry and leaflet exchange surfaces', fontsize=15)
     fig.text(.5, .035, 'Right: schematic source patches, shown only to explain the calculation; no trunk or bare-frond-base sink.', ha='center', fontsize=10)
     fig.savefig(out/'figures/where_uptake_happens.png', dpi=140, facecolor=WHITE); plt.close(fig)
     if selected[0]['fans'].mounting_shell == 0:

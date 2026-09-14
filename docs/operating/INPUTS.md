@@ -61,26 +61,20 @@ Use SI units except CO₂ in ppm, exchange in µmol/s and the stated fan CFM rat
 | `display.co2_min_ppm`, `co2_max_ppm` | 380, 405 | Preferred fixed linear viridis scale; expanded outward if actual extrema exceed it |
 | `display.fps` | 6 | Encoded frames per second; physical simulation time is printed separately |
 
-## Geometry decision, 14 September 2026
+## Chamber geometry and coordinates
 
-The owner adopted the recent documentation's nominal **6 m design width ×
-4 m design depth × 4 m clear height**. Solver x is the sliding direction, so
-the configuration lists `width_m=4`, `depth_m=6`, `height_m=4`: **96 m³**.
-The August 28 LIBZ budget request describes an existing 6 × 4 × 4 m chamber;
-the September upsizing presentation labels the same size as approximate
-width × depth × clear height. These are documentary dimensions, not an
-inside-to-inside field survey. The previous 3.7 m height came from the CAD
-glazing envelope and is preserved with its earlier result.
+The reference geometry is **6 m design width × 4 m design depth × 4 m clear
+height**. In the solver, x follows sliding travel, so the input uses
+`width_m=4`, `depth_m=6`, `height_m=4`. Its rectangular air volume is **96 m³**.
+These are nominal dimensions from technical documentation, pending a survey of
+the installed inside dimensions. They do not account for every structural or
+plant displacement from the enclosed airspace.
 
-The floor remains a prescribed 0.6 m above ground, placing the new roof at
-4.6 m. Automatic fan heights are **0.667, 2.000 and 3.333 m above the floor**;
-the automatically sized external domain is 14 × 10 × 9.3 m. The palm and
-prescribed net uptake retain their previous values. This geometry change
-does not reprocess or rescale the historical observation-derived uptake.
-
-The local documentary evidence and source hashes are retained in
-`simulation/maintenance/2026-09-13-chamber-size-inspection/`. Those private
-documents are not required by, or included in, the portable source repository.
+The floor is assumed to be 0.6 m above the external ground, putting the roof
+at 4.6 m. Automatic fan placement gives **0.667, 2.000 and 3.333 m above the
+floor**. The automatically sized exterior domain is 14 × 10 × 9.3 m.
+Changing chamber size leaves the plant dimensions and total net exchange
+unchanged; specify those separately when modelling another plant or period.
 
 Example overrides (quote lists and text at the shell):
 
@@ -91,7 +85,7 @@ python scripts/operating_chamber.py all --input configs/operating/current.yaml \
   --set fans.count=4 --set fans.free_air_cfm_per_fan=120 \
   --set exchange.net_co2_umol_s=-30 \
   --set 'exchange.label=Prescribed diagnostic net uptake' \
-  --output runs/03_reference_chamber/my_changed_inputs
+  --output runs/changed_inputs
 ```
 
 For three explicitly placed fans use, for example,
