@@ -6,6 +6,10 @@ grid-sensitivity check exceeds the specified 5% criterion. These checks assess
 the implementation and numerical behaviour; they do not validate the model
 against measurements.
 
+The [15 September engine audit](../ENGINE_AUDIT.md) repeats the tests and
+saved-field checks, identifies the generating backend, and distinguishes this
+Python solver from the separate WaterLily implementation.
+
 ## Reference calculation
 
 The chamber has a nominal rectangular air volume of **96 m³**: 4 × 6 × 4 m

@@ -4,6 +4,12 @@ The Julia package test run passes **337 assertions** under Julia 1.12.5 and
 WaterLily 1.8.0. See [the test record](../evidence/tests.json) and
 [the executable tests](../test/runtests.jl). These are implementation checks,
 not experimental validation.
+
+The [15 September engine audit](../../docs/ENGINE_AUDIT.md) repeats this suite,
+adds independent analytical 3D benchmarks, verifies the official package tree,
+and replays the full reference fields. Its dated evidence supplements the
+earlier records below; the chamber qualification failures remain open.
+
 New tests cover zero-wind diffusion to ambient reservoirs and moving-face
 velocity/geometry timing. The [iteration record](ITERATIONS.md) includes the
 retained baseline and reproducible endpoint probes.

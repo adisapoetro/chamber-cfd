@@ -5,6 +5,10 @@ fans and CO₂ uptake on representative palm leaflets. **WaterLily 1.8.0 compute
 airflow; a separately tested Julia extension computes CO₂ transport.** Python
 only renders saved results.
 
+The [engine and scientific audit](../docs/ENGINE_AUDIT.md) verifies the loaded
+package against the official release, adds analytical 3D flow and transport
+checks, and explains which chamber-specific calculations remain unqualified.
+
 The reference has 4 × 6 × 4 m inside airspace (96 m³), a 2.39 m palm, 1.5 m/s wind
 and two cycles of 5 minutes sealed followed by 10 minutes unsealed. Fans operate
 while sealed. Prescribed net uptake continues in every phase.

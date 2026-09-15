@@ -1,0 +1,666 @@
+{
+  "audit_date": "2026-09-15",
+  "repository": "https://github.com/adisapoetro/chamber-cfd",
+  "baseline_revision": "191a1aa542cc92283fa61f27090f37145d823f3b",
+  "scope": "Source and runtime identity, component tests, independent analytical benchmarks, read-only full saved-field replay, short refinement and closing-gap geometry. No field validation or numerical changes.",
+  "scientific_verdict": "NOT_QUALIFIED_FOR_QUANTITATIVE_CHAMBER_PERFORMANCE",
+  "runtime": {
+    "python": {
+      "version": "3.12.13",
+      "numpy": "2.4.4",
+      "scipy": "1.17.1",
+      "entry_module": "fluid_dynamic.operating.workflow",
+      "run_case_module": "fluid_dynamic.recreated.fan_solver",
+      "run_case_source": "src/fluid_dynamic/recreated/fan_solver.py",
+      "phiflow_module_available": false,
+      "loaded_phi_modules": []
+    },
+    "julia": {
+      "version": "1.12.5",
+      "julia_threads": 1,
+      "blas_threads": 1,
+      "waterlily_backend": "SIMD"
+    }
+  },
+  "official_waterlily_release": {
+    "repository": "https://github.com/WaterLily-jl/WaterLily.jl",
+    "release_tag": "v1.8.0",
+    "tag_object_sha": "9f0f46fafb758f9f719dcc63d69ee6471358d8f8",
+    "commit_sha": "2a2b2ba2eeacc885d84e346f743b72a34e0b713f",
+    "tree_sha": "8e1d973f428df4bae450e1a45f19d0dba3ac6857",
+    "matches_registered_manifest_tree": true
+  },
+  "tests": {
+    "python": {
+      "command": "python -m pytest tests/operating tests/recreated -q -p no:cacheprovider",
+      "tests": 79,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite_elapsed_s": 14.405,
+      "exit_code": 0,
+      "warning": "pytest record_property is incompatible with xunit2 format; tests passed."
+    },
+    "julia": {
+      "command": "julia --project=waterlily --threads=1 -e 'using Pkg; Pkg.test()'",
+      "exit_code": 0,
+      "assertions": 337,
+      "testsets": [
+        {
+          "testset": "Stagnant ambient reservoirs diffuse without wind",
+          "passed": 8,
+          "total": 8,
+          "seconds": 2.5
+        },
+        {
+          "testset": "Independent chamber, palm, wind, fan and uptake inputs",
+          "passed": 6,
+          "total": 6,
+          "seconds": 11.0
+        },
+        {
+          "testset": "Scalar advection, diffusion and bounds",
+          "passed": 105,
+          "total": 105,
+          "seconds": 0.2
+        },
+        {
+          "testset": "Cut geometry, exact closed capacity and impermeable walls",
+          "passed": 7,
+          "total": 7,
+          "seconds": 0.3
+        },
+        {
+          "testset": "Moving walls preserve uniform concentration without resetting cells",
+          "passed": 49,
+          "total": 49,
+          "seconds": 1.4
+        },
+        {
+          "testset": "Native velocity and geometry use matching times",
+          "passed": 9,
+          "total": 9,
+          "seconds": 1.5
+        },
+        {
+          "testset": "Native airflow coupled to leaflet uptake through a full diagnostic cycle",
+          "passed": 18,
+          "total": 18,
+          "seconds": 26.9
+        },
+        {
+          "testset": "Reference inputs and fan configuration",
+          "passed": 18,
+          "total": 18,
+          "seconds": 0.2
+        },
+        {
+          "testset": "Self-contained airflow bundle",
+          "passed": 40,
+          "total": 40,
+          "seconds": 6.5
+        },
+        {
+          "testset": "Five-minute closure and ten-minute open phase",
+          "passed": 39,
+          "total": 39,
+          "seconds": 0.0
+        },
+        {
+          "testset": "Native body distance, wall velocity and reference volume",
+          "passed": 20,
+          "total": 20,
+          "seconds": 0.1
+        },
+        {
+          "testset": "Native WaterLily canonical flow",
+          "passed": 8,
+          "total": 8,
+          "seconds": 2.9
+        },
+        {
+          "testset": "Native chamber flow and fan forcing",
+          "passed": 10,
+          "total": 10,
+          "seconds": 0.9
+        }
+      ]
+    }
+  },
+  "analytical_backend_benchmarks": {
+    "checks": {
+      "three_dimensional_transport_bounded": true,
+      "native_flow_and_pressure": true,
+      "loaded_registered_package": true,
+      "three_dimensional_transport_refines": true,
+      "three_dimensional_transport_conserves": true,
+      "three_dimensional_airflow_refines": true,
+      "three_dimensional_airflow_divergence": true
+    },
+    "extension_3d_advection_diffusion": [
+      {
+        "physical_time_s": 0.1,
+        "maximum_ppm": 400.6454721798248,
+        "cells_per_axis": 8,
+        "mass_budget_max_ppm_m3": 5.684341886080802e-14,
+        "rms_concentration_error_ppm": 0.04571842376631878,
+        "minimum_ppm": 399.3545278201752
+      },
+      {
+        "physical_time_s": 0.1,
+        "maximum_ppm": 400.7094769174604,
+        "cells_per_axis": 12,
+        "mass_budget_max_ppm_m3": 5.115907697472721e-13,
+        "rms_concentration_error_ppm": 0.034516348007908655,
+        "minimum_ppm": 399.29052308254063
+      },
+      {
+        "physical_time_s": 0.1,
+        "maximum_ppm": 400.7349059885276,
+        "cells_per_axis": 16,
+        "mass_budget_max_ppm_m3": 0,
+        "rms_concentration_error_ppm": 0.02728280189382363,
+        "minimum_ppm": 399.2650940114724
+      }
+    ],
+    "status": "PASS_IMPLEMENTATION_BENCHMARKS",
+    "identity": {
+      "actual_domain_m": [
+        14,
+        10,
+        10
+      ],
+      "waterlily_version": "1.8.0",
+      "backend": "SIMD",
+      "julia_version": "1.12.5",
+      "physical_wall_input_m": 0.003,
+      "active_project_matches": true,
+      "declared_waterlily_tree_sha1": "8e1d973f428df4bae450e1a45f19d0dba3ac6857",
+      "scalar_transport": "Project-owned Julia finite-volume extension",
+      "pressure_type_is_native": true,
+      "loaded_tree_matches_manifest": true,
+      "loaded_waterlily_tree_sha1": "8e1d973f428df4bae450e1a45f19d0dba3ac6857",
+      "flow_type_is_native": true,
+      "numerical_wall_m": 1.5
+    },
+    "native_3d_abc_flow": [
+      {
+        "physical_time_s": 0.10000000000000002,
+        "max_divergence_s_inv": 1.964883693089669e-08,
+        "cells_per_axis": 8,
+        "all_three_velocity_components_nonzero": true,
+        "relative_velocity_l2_error": 0.01357762837714196
+      },
+      {
+        "physical_time_s": 0.10000000000000002,
+        "max_divergence_s_inv": 8.41091154774081e-09,
+        "cells_per_axis": 16,
+        "all_three_velocity_components_nonzero": true,
+        "relative_velocity_l2_error": 0.003779641183503232
+      },
+      {
+        "physical_time_s": 0.10000000000000002,
+        "max_divergence_s_inv": 1.4119795729421002e-08,
+        "cells_per_axis": 32,
+        "all_three_velocity_components_nonzero": true,
+        "relative_velocity_l2_error": 0.0009586268774590736
+      }
+    ],
+    "source_sha256": {
+      "src/Forcing.jl": "411a1e858f220cb02c30ec9015c0bcb44b57a770ac5f4a904033c30d74ad65d4",
+      "src/Coupled.jl": "9af9cac27bfa68174d619922bc7594eece5a9f8eabf3a719a9d40a1b0ec65342",
+      "src/CutCells.jl": "ebe8e1a7082e1a5401a9d7b2c6031951095fdeb84ab16ac90ea93152a3bcfb95",
+      "src/Geometry.jl": "4946c3100ebc4890286340364ef61aec6df4c5b08fa98d5f71b0c7d4cad9bab6",
+      "src/Transport.jl": "7338cf576927be867a8453846ac53cfdb38e694f487b81de9f69513a870d9ecf",
+      "src/Config.jl": "2a63861605a6096bc2bc24439789e815effb40dba83654004b805c81dc30cced",
+      "Project.toml": "2198b95b0cb6fe0bd9b053ef892a6a7ba60a870663672101ce4f578d4bdd59e8",
+      "Manifest.toml": "3802ad426ed836c89afcc735460d87cddb3e522e86a15170024ad9182226a895",
+      "src/ChamberWaterLily.jl": "6d82459cb26e75a7a309dfb4e78ba334eac89e0cb9678a63758a977efe040f9c",
+      "src/LeafSource.jl": "c8919338fd77d3ea9949e79e779fa6bbf7a8924972a2cf4f3ead56d9d924aae8",
+      "LocalPreferences.toml": "db069bc5895a8ab90dd9cda447188e69eeeead9a3b6c2884175b31015921efcf",
+      "src/Flow.jl": "223eb511d6fe7fe1517f04793f8b2135b3da10c4a76ae234ae9c284a8a626614",
+      "configs/current.toml": "16e73d18ebb57302679f767128bb57d65ec52d63803878783d41303ad65493b2",
+      "scripts/audit_backend.jl": "f12aa402268c94ee8766e6ce3fbb700d98a5014646d2b9e0d17eb3806055c29f"
+    },
+    "scientific_scope": "Canonical periodic flows and scalar transport only; no chamber, moving-wall, fan or field validation"
+  },
+  "saved_field_replay": {
+    "scope": "Read-only numerical replay; no field validation or changes to existing results",
+    "script_sha256": "6aa0a4baabf3b100f9c30fd0579f03aaf459e4032f6ab8e1efe103b95adb1f9f",
+    "python": {
+      "backend": "Project-owned NumPy/SciPy ALE finite-volume solver",
+      "source_identity": {
+        "frozen_files_verified": 27,
+        "generating_core_sha256": {
+          "src/fluid_dynamic/__init__.py": "91447944015cec709e8aa7655f7e9d64e1e4508e7023a57fe3746911c0fc6fed",
+          "src/fluid_dynamic/operating/__init__.py": "d77dcb3b05172146e4c9a39e71de2572bbd305ad037010381c8e21b31630cdd1",
+          "src/fluid_dynamic/operating/audit.py": "f44bc3b67f69c9ae6c8acc983f1450fe581abdf370c142870201b01b53ed873f",
+          "src/fluid_dynamic/operating/config.py": "030fefe62c771eb404915d76914d7546a08394027a7ce6cfbe8923adf010948f",
+          "src/fluid_dynamic/operating/render.py": "8ddee5856464a796eff275a9eafe64ad9c7bfe267b16fe2bd95d41af2b366af5",
+          "src/fluid_dynamic/operating/views.py": "9a423ee946b3bf6fbaab2944452c91ee8761f3b642f1a9ac7c11c7f4d6e083e5",
+          "src/fluid_dynamic/operating/workflow.py": "1b2709ae6b3af09b1f9f0463341673d02878437e859f9bcd7ef78498c5390238",
+          "src/fluid_dynamic/recreated/__init__.py": "0f434d43a8bf9454c4b632bbd3bd6127a7525af323818ed6e6ec3dedcadd7ebc",
+          "src/fluid_dynamic/recreated/fan_forcing.py": "a31fb8cc94678f49fb0024349c7b3cc571dfaf57e8a08099b49239ff2e7b9193",
+          "src/fluid_dynamic/recreated/fan_solver.py": "16e54ddbfbe11ce2974a457d7c037f7723cea8d65c8696677895c8ab5755f413",
+          "src/fluid_dynamic/recreated/frond_geometry.py": "0da1778b434e3d3d771da0f51e7236a28190ffd423bb64ddb32b081ac9e85091",
+          "src/fluid_dynamic/recreated/leaf_geometry.py": "039c4eec01073f72084ff58e078f4293817d4fcba7461bc054123556baf380dd",
+          "src/fluid_dynamic/recreated/leaf_source.py": "657c6e9fa7f73290f59760bdeb6679783d4c0d2854d70f554d2d915b0b923a40",
+          "src/fluid_dynamic/recreated/mesh.py": "ad4aa388cdc8aaba31c124edf05fac5dc444b74ff990fda45353dd0d2fdeb5f3",
+          "src/fluid_dynamic/recreated/operators.py": "d9ce22bba99d27dc11b930a5124a953ff85ef196b1b0effb73799d0e2b004794",
+          "src/fluid_dynamic/recreated/render.py": "307251c44501742f306cf586533e23ed33827fbf9bb1a92a04124d682e2b8ed5",
+          "src/fluid_dynamic/recreated/solver.py": "7fd4f404a77425297a5a9e26bdc5e1b477fb6271cdaf7666f679691ff50ba273",
+          "src/fluid_dynamic/scenarios/__init__.py": "0eb9f4b9883aba5992bc8cccfcf969b601fcb5caee39640df30c7b437ede56ab",
+          "src/fluid_dynamic/scenarios/geometry.py": "f7c931893267bfbeff137dc385eaa980fb2a6ae0b0c58538b10172f17f495542",
+          "src/fluid_dynamic/scenarios/presentation_render.py": "947dd9a474a8d62f3c5dd34d6621e50e53b929fedf58b446162513e8ff78dff2"
+        },
+        "current_core_matches_generating_source": false,
+        "different_current_core_files": [
+          "src/fluid_dynamic/operating/config.py",
+          "src/fluid_dynamic/operating/render.py",
+          "src/fluid_dynamic/operating/views.py"
+        ]
+      },
+      "cases": {
+        "main": {
+          "verified_case_files": 367,
+          "snapshots": 181,
+          "reference_volume_m3": 96.0,
+          "saved_mean_error_ppm": 1.1368683772161603e-13,
+          "saved_sd_error_ppm": 2.220446049250313e-16,
+          "saved_inventory_history_error_ppm_m3": 1.1641532182693481e-10,
+          "source_distribution_error_umol_s": 8.881784197001252e-16,
+          "sealed_analytic_error_ppm": 1.4620428601119784e-07,
+          "recorded_budget_fraction_max": 2.4093540435886738e-08
+        },
+        "grid": {
+          "verified_case_files": 67,
+          "snapshots": 31,
+          "reference_volume_m3": 96.0,
+          "saved_mean_error_ppm": 1.7053025658242404e-13,
+          "saved_sd_error_ppm": 5.684341886080802e-14,
+          "saved_inventory_history_error_ppm_m3": 8.731149137020111e-10,
+          "source_distribution_error_umol_s": 0.0,
+          "sealed_analytic_error_ppm": 1.0161181762669003e-07,
+          "recorded_budget_fraction_max": 2.992937633913097e-08
+        },
+        "dt": {
+          "verified_case_files": 67,
+          "snapshots": 31,
+          "reference_volume_m3": 96.0,
+          "saved_mean_error_ppm": 1.1368683772161603e-13,
+          "saved_sd_error_ppm": 2.220446049250313e-16,
+          "saved_inventory_history_error_ppm_m3": 1.1641532182693481e-10,
+          "source_distribution_error_umol_s": 8.881784197001252e-16,
+          "sealed_analytic_error_ppm": 1.1113343134638853e-07,
+          "recorded_budget_fraction_max": 3.275541499073008e-08
+        }
+      },
+      "sensitivity": {
+        "grid": {
+          "relative_rms_changes": {
+            "roi_std_ppm": 0.058340983920889974,
+            "roi_mean_speed_m_s": 0.042445566930661094
+          },
+          "threshold": 0.05,
+          "end_time_s": 300.0,
+          "status": "FAIL"
+        },
+        "dt": {
+          "relative_rms_changes": {
+            "roi_std_ppm": 0.011243796774032935,
+            "roi_mean_speed_m_s": 0.0054074738517959926
+          },
+          "threshold": 0.05,
+          "end_time_s": 300.0,
+          "status": "PASS"
+        }
+      },
+      "leaflet_triangles": 240,
+      "leaflet_proxy_area_m2": 0.7328095439296077,
+      "independent_open_phase_inventory_budget": "NOT_REPLAYABLE: boundary scalar flux is not saved separately",
+      "opening_grid_convergence": "NOT_ESTABLISHED",
+      "experimental_validation": "NOT_ESTABLISHED"
+    },
+    "waterlily": {
+      "backend": "WaterLily 1.8.0 airflow plus project-owned Julia scalar extension",
+      "source_identity": {
+        "frozen_files_verified": 34,
+        "generating_core_sha256": {
+          "src/Forcing.jl": "411a1e858f220cb02c30ec9015c0bcb44b57a770ac5f4a904033c30d74ad65d4",
+          "src/Coupled.jl": "9af9cac27bfa68174d619922bc7594eece5a9f8eabf3a719a9d40a1b0ec65342",
+          "src/CutCells.jl": "ebe8e1a7082e1a5401a9d7b2c6031951095fdeb84ab16ac90ea93152a3bcfb95",
+          "src/Geometry.jl": "4946c3100ebc4890286340364ef61aec6df4c5b08fa98d5f71b0c7d4cad9bab6",
+          "src/Transport.jl": "7338cf576927be867a8453846ac53cfdb38e694f487b81de9f69513a870d9ecf",
+          "src/Config.jl": "2a63861605a6096bc2bc24439789e815effb40dba83654004b805c81dc30cced",
+          "src/ChamberWaterLily.jl": "6d82459cb26e75a7a309dfb4e78ba334eac89e0cb9678a63758a977efe040f9c",
+          "src/LeafSource.jl": "c8919338fd77d3ea9949e79e779fa6bbf7a8924972a2cf4f3ead56d9d924aae8",
+          "src/Flow.jl": "223eb511d6fe7fe1517f04793f8b2135b3da10c4a76ae234ae9c284a8a626614"
+        },
+        "current_core_matches_generating_source": true,
+        "different_current_core_files": []
+      },
+      "manifest_files_verified": 809,
+      "shape": [
+        28,
+        20,
+        20
+      ],
+      "snapshots": 181,
+      "transport_steps": 25686,
+      "independent_inventory_error_ppm_m3": 6.8498167138386634e-09,
+      "saved_mean_error_ppm": 1.7053025658242404e-13,
+      "saved_sd_error_ppm": 2.220446049250313e-16,
+      "sealed_analytic_error_ppm": 1.2050804798491299e-11,
+      "reference_volume_m3": 96,
+      "numerical_wall_m": 1.5,
+      "physical_wall_input_m": 0.003,
+      "max_roi_flux_correction_fraction": 0.8791541033636003,
+      "max_roi_flux_correction_time_s": 900.0,
+      "max_aperture_velocity_correction_m_s": 133.95167959711182,
+      "max_gcl_residual_m3_s": 3.4255931424809205e-13,
+      "coupling_screen": "FAIL",
+      "full_cycle_grid_convergence": "NOT_ESTABLISHED",
+      "experimental_validation": "NOT_ESTABLISHED",
+      "budget_scope": "Saved concentration/volume replay against logged source and boundary flux; native face-flux reconstruction is not independently replayed"
+    },
+    "implementation_replay": "PASS",
+    "physical_qualification": "NOT_ESTABLISHED"
+  },
+  "python_source_difference_review": {
+    "numerical_operators_byte_identical": true,
+    "byte_differences": [
+      {
+        "path": "src/fluid_dynamic/operating/config.py",
+        "generating_sha256": "030fefe62c771eb404915d76914d7546a08394027a7ce6cfbe8923adf010948f",
+        "current_sha256": "aa073be9aadf565dd63f924d86a35bda70ae9faaaf39b104f25b49a888130c22",
+        "ast_identical": true,
+        "reviewed_difference": "comment_only"
+      },
+      {
+        "path": "src/fluid_dynamic/operating/render.py",
+        "generating_sha256": "8ddee5856464a796eff275a9eafe64ad9c7bfe267b16fe2bd95d41af2b366af5",
+        "current_sha256": "6c81c6e6092121dd50d256b933dc1ef3b38c4cb6e2abf11fb8294b26a81ef4a7",
+        "ast_identical": false,
+        "reviewed_difference": "presentation_text_only"
+      },
+      {
+        "path": "src/fluid_dynamic/operating/views.py",
+        "generating_sha256": "9a423ee946b3bf6fbaab2944452c91ee8761f3b642f1a9ac7c11c7f4d6e083e5",
+        "current_sha256": "2f4a4c398a2fca0f3b7d00a49f13bdd719a89333e6f7544b1296df97db3fc5f6",
+        "ast_identical": false,
+        "reviewed_difference": "presentation_text_only"
+      }
+    ],
+    "scope": "Byte identity of the six listed numerical/operator/workflow files; configuration AST identity; manual review of rendering text differences. Original raw mismatches retained in saved-field replay.",
+    "verified_numerical_paths": [
+      "src/fluid_dynamic/recreated/fan_solver.py",
+      "src/fluid_dynamic/recreated/operators.py",
+      "src/fluid_dynamic/recreated/mesh.py",
+      "src/fluid_dynamic/recreated/fan_forcing.py",
+      "src/fluid_dynamic/recreated/leaf_source.py",
+      "src/fluid_dynamic/operating/workflow.py"
+    ]
+  },
+  "short_sensitivity": {
+    "scientific_status": "SHORT_DIAGNOSTIC_NOT_FULL_CYCLE_CONVERGENCE",
+    "cases": [
+      {
+        "sealed_mean_error_ppm": 3.410605131648481e-13,
+        "steps": 129,
+        "roi_correction_final_relative_l2": 0.016072203576264,
+        "fans": 3,
+        "cell_m": 0.5,
+        "actual_domain_m": [
+          14,
+          10,
+          10
+        ],
+        "wind_to_deg": 0,
+        "dt_max_s": 0.5,
+        "budget_error_max_ppm_m3": 1.11768439108633e-10,
+        "elapsed_s": 11.942647959,
+        "co2_spatial_sd_ppm": 0.261153308159568,
+        "case": "reference",
+        "roi_correction_max_relative_l2": 0.635070070979995,
+        "co2_mean_ppm": 399.88684628995514,
+        "duration_s": 10,
+        "numerical_wall_m": 1.5
+      },
+      {
+        "sealed_mean_error_ppm": 9.094947017729282e-13,
+        "steps": 400,
+        "roi_correction_final_relative_l2": 0.015877150823771898,
+        "fans": 3,
+        "cell_m": 0.5,
+        "actual_domain_m": [
+          14,
+          10,
+          10
+        ],
+        "wind_to_deg": 0,
+        "dt_max_s": 0.025,
+        "budget_error_max_ppm_m3": 1.546215229326064e-10,
+        "elapsed_s": 23.850041,
+        "co2_spatial_sd_ppm": 0.262326535246629,
+        "case": "smaller_time_step",
+        "roi_correction_max_relative_l2": 0.8541286131252604,
+        "co2_mean_ppm": 399.8868462899557,
+        "duration_s": 10,
+        "numerical_wall_m": 1.5
+      },
+      {
+        "sealed_mean_error_ppm": 1.1368683772161603e-13,
+        "steps": 291,
+        "roi_correction_final_relative_l2": 0.0059015005862862,
+        "fans": 3,
+        "cell_m": 0.25,
+        "actual_domain_m": [
+          14,
+          10,
+          10
+        ],
+        "wind_to_deg": 0,
+        "dt_max_s": 0.5,
+        "budget_error_max_ppm_m3": 1.2360293205390372e-10,
+        "elapsed_s": 378.44425,
+        "co2_spatial_sd_ppm": 0.3507372007428861,
+        "case": "refined_grid_fixed_wall",
+        "roi_correction_max_relative_l2": 0.0059015005862862,
+        "co2_mean_ppm": 399.8868462899549,
+        "duration_s": 10,
+        "numerical_wall_m": 1.5
+      },
+      {
+        "sealed_mean_error_ppm": 0,
+        "steps": 18,
+        "roi_correction_final_relative_l2": 0.9689457918870543,
+        "fans": 0,
+        "cell_m": 0.5,
+        "actual_domain_m": [
+          14,
+          10,
+          10
+        ],
+        "wind_to_deg": 90,
+        "dt_max_s": 0.5,
+        "budget_error_max_ppm_m3": 4.494307124641369e-11,
+        "elapsed_s": 1.170211583,
+        "co2_spatial_sd_ppm": 0.06521126193481248,
+        "case": "crosswind_no_fans",
+        "roi_correction_max_relative_l2": 1.0010682254341658,
+        "co2_mean_ppm": 399.9886846289955,
+        "duration_s": 1,
+        "numerical_wall_m": 1.5
+      }
+    ]
+  },
+  "closing_gap_geometry": {
+    "script_sha256": "29707ed81e5a697d822fa213f13ef76e25163efbbe9ed33f1779c715d095fd9a",
+    "status": "GEOMETRY_DIAGNOSTIC_ONLY",
+    "interpretation": "The sampled kernel integral is a geometry diagnostic, not native fluid mass or physical air capacity.",
+    "geometry_sha256": "4946c3100ebc4890286340364ef61aec6df4c5b08fa98d5f71b0c7d4cad9bab6",
+    "cases": [
+      {
+        "near_closed_kernel_jump_m3": 1.3672050726772795,
+        "samples": [
+          {
+            "sampled_domain_kernel_integral_m3": 1106.9569911186431,
+            "gap_m": 2,
+            "roof_seam_kernel_mobility": 1,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1106.9569911186431,
+            "gap_m": 1,
+            "roof_seam_kernel_mobility": 1,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1106.8488568881598,
+            "gap_m": 0.5,
+            "roof_seam_kernel_mobility": 0.9091549430918954,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1107.3259020992987,
+            "gap_m": 0.25,
+            "roof_seam_kernel_mobility": 0.7375395395196382,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1108.430602762147,
+            "gap_m": 0.125,
+            "roof_seam_kernel_mobility": 0.623405959900277,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1109.4615131022592,
+            "gap_m": 0.05,
+            "roof_seam_kernel_mobility": 0.5498973183810889,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1110.1057232418468,
+            "gap_m": 0.01,
+            "roof_seam_kernel_mobility": 0.5099991775735552,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1110.2771596266275,
+            "gap_m": 1e-06,
+            "roof_seam_kernel_mobility": 0.5000009999999975,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1108.9099545539502,
+            "gap_m": 0,
+            "roof_seam_kernel_mobility": 0,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          }
+        ],
+        "cell_m": 0.5,
+        "fixed_numerical_wall_m": 1.5
+      },
+      {
+        "near_closed_kernel_jump_m3": 1.0605564279628652,
+        "samples": [
+          {
+            "sampled_domain_kernel_integral_m3": 1109.6415097105,
+            "gap_m": 2,
+            "roof_seam_kernel_mobility": 1,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1109.6415097105,
+            "gap_m": 1,
+            "roof_seam_kernel_mobility": 1,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1109.6415097104998,
+            "gap_m": 0.5,
+            "roof_seam_kernel_mobility": 1,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1109.4217783978984,
+            "gap_m": 0.25,
+            "roof_seam_kernel_mobility": 0.9091549430918954,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1109.7837320094568,
+            "gap_m": 0.125,
+            "roof_seam_kernel_mobility": 0.7375395395196382,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1110.4702215367583,
+            "gap_m": 0.05,
+            "roof_seam_kernel_mobility": 0.5991815821541729,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1111.0224180461817,
+            "gap_m": 0.01,
+            "roof_seam_kernel_mobility": 0.5199934215624034,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1111.1821770026959,
+            "gap_m": 1e-06,
+            "roof_seam_kernel_mobility": 0.500001999999995,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          },
+          {
+            "sampled_domain_kernel_integral_m3": 1110.121620574733,
+            "gap_m": 0,
+            "roof_seam_kernel_mobility": 0,
+            "sharp_domain_fluid_volume_m3": 1111.7
+          }
+        ],
+        "cell_m": 0.25,
+        "fixed_numerical_wall_m": 1.5
+      }
+    ],
+    "limitations": [
+      "No airflow or CO2 solve. Numerical walls and exterior box held fixed.",
+      "A persistent kernel jump identifies unresolved interface support; this probe does not qualify a replacement wall treatment."
+    ]
+  },
+  "reproduction_source_sha256": {
+    "requirements-operating.lock": "5bb6ba34bb7d8ab81e118720803a975a3a8530a4ef0894780fb3cf863efed1e3",
+    "scripts/audit_saved_fields.py": "6aa0a4baabf3b100f9c30fd0579f03aaf459e4032f6ab8e1efe103b95adb1f9f",
+    "tests/operating/test_workflow.py": "aff570c4dd8f1eae396fa72d2936399ce139ac03c85237c5809b1ed42d411072",
+    "tests/recreated/test_conservation.py": "2aeb468edcde72f7220c41218dfbb521b4eabdd449103e740ae64cca9bd60393",
+    "tests/recreated/test_flow.py": "0276c3231875a8e3d26aaf584057dd07f75568e7f63bb442e1faf72a98971987",
+    "tests/recreated/test_scalar_accuracy.py": "9ca0b77d2cac9fa8413a47d71dbdda11fe660fa2bb26308f6c44d104299de041",
+    "tests/recreated/test_wind_direction.py": "35caebb7dfb88f2ca264bb27d2c2fbc52702fb7f26a4471a541dd847223f00a1",
+    "waterlily/LocalPreferences.toml": "db069bc5895a8ab90dd9cda447188e69eeeead9a3b6c2884175b31015921efcf",
+    "waterlily/Manifest.toml": "3802ad426ed836c89afcc735460d87cddb3e522e86a15170024ad9182226a895",
+    "waterlily/Project.toml": "2198b95b0cb6fe0bd9b053ef892a6a7ba60a870663672101ce4f578d4bdd59e8",
+    "waterlily/scripts/audit_backend.jl": "f12aa402268c94ee8766e6ce3fbb700d98a5014646d2b9e0d17eb3806055c29f",
+    "waterlily/scripts/check_gap_geometry.jl": "29707ed81e5a697d822fa213f13ef76e25163efbbe9ed33f1779c715d095fd9a",
+    "waterlily/scripts/check_sensitivity.jl": "961c5997a45c776b0f82691b0d241b67ad4b8ba22ded36cd229a18027c06c484",
+    "waterlily/test/runtests.jl": "2a4e1fa7e7e800c84703a0bca1ee1889e09adea4e32d857b4cb496eb3d6984fc",
+    "waterlily/test/transport.jl": "d424b749aabf6edea450e6aa97902a190c81d6b11f48c3757f84087747135d14"
+  },
+  "local_log_sha256": {
+    "python-tests.log": "ac3c415c697b7a144db78bf1bb35759eb8ba81f44cd1a49f74128179b5d4a00d",
+    "julia-tests.log": "7ef19222cb77cb1bc2af9c50f32411af731b2fcf6a76f4291d680c356ea81c49",
+    "backend-benchmarks-attempt2.log": "c10a263af9534abd12ee531fc2cfcf6d96de29d937883207f5b0d47346d53290",
+    "saved-field-replay.log": "9922a6f04207b5f62dfa26e47157c9e8f75f3433d3270a63972d5f9d41bf4a47",
+    "short-sensitivity.log": "aa09a1d0d256bba5f73b06aecac5f7e7064d29f51cc80237fbad39769e9e525d",
+    "gap-geometry.log": "9a265dddba61d9f5a1b8d1d30e31c4c8268d7f2a160fc2f2fcae14f61c5f35bf"
+  },
+  "evidence_limits": [
+    "Raw private observations were not reanalysed; the previously published aggregate exchange input and its recorded provenance were checked.",
+    "Full binary fields are retained locally and regenerated through documented workflows; compact published example folders do not contain these large fields.",
+    "Conservation replay uses recorded boundary flux for Julia and cannot independently recover the Python open-phase external flux from the saved bundle.",
+    "The Python manufactured channel check isolates the viscous operator; a full coupled three-dimensional canonical momentum benchmark remains unestablished.",
+    "The new three-dimensional analytic benchmarks have no chamber, fans or moving body.",
+    "No complete refined 1800-second WaterLily case was run; short refinement is diagnostic.",
+    "Passing implementation tests does not establish calibrated fans, grid-converged chamber mixing or experimental validation.",
+    "Local execution logs are retained outside the public example; their hashes identify them without exporting machine paths."
+  ]
+}

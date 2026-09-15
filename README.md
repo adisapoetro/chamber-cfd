@@ -5,6 +5,18 @@ opens and exchanges air with its surroundings. External wind and internal fans
 drive the airflow; a specified net gas-exchange rate removes or releases CO₂
 at representative leaflets along the fronds.
 
+There are two separate implementations:
+
+| Example | Airflow engine | CO₂ transport |
+|---|---|---|
+| [Python central fans](examples/central_fans/) — animation below | Project-owned NumPy/SciPy finite-volume solver | Project-owned Python solver |
+| [Julia current chamber](waterlily/examples/current_chamber/) | Official WaterLily 1.8.0, in 3D | Project-owned Julia finite-volume extension |
+
+The Python example does not use PhiFlow. **Neither example is qualified for
+quantitative chamber-performance claims.** The [engine and scientific audit](docs/ENGINE_AUDIT.md)
+traces the generating code, reproduces numerical checks and records the failed
+coupling and resolution screens separately from passing tests.
+
 ![CO₂ concentration and airflow during a chamber cycle](examples/central_fans/videos/cycle.gif)
 
 The example uses a nominal **6 × 4 × 4 m chamber**, three central fans and a
